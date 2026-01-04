@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مشاهدة الدرس - منصة واد الرمان التعليمية</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 30%, #f093fb 50%, #ff6b6b 70%, #4c1d95 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+            animation: shimmer 3s ease-in-out infinite;
+            z-index: -1;
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        
+        .glass-morphism {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            background: #000;
+            border-radius: 1rem;
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 1rem;
+        }
+        
+        .progress-ring {
+            transform: rotate(-90deg);
+        }
+        
+        .progress-ring-circle {
+            transition: stroke-dashoffset 0.35s;
+            stroke: #10b981;
+            stroke-width: 4;
+            fill: transparent;
+        }
+        
+        .sidebar-item {
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar-item:hover {
+            transform: translateX(-5px);
+        }
+        
+        .lesson-card {
+            transition: all 0.3s ease;
+        }
+        
+        .lesson-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .floating-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .dark-mode {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #475569 100%);
+            color: #f1f5f9;
+        }
+        
+        .dark-mode .glass-morphism {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .dark-mode .bg-white {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%) !important;
+            color: #f1f5f9;
+        }
+        
+        .dark-mode .text-gray-900 {
+            color: #f1f5f9 !important;
+        }
+        
+        .dark-mode .text-gray-700 {
+            color: #e2e8f0 !important;
+        }
+        
+        .dark-mode .text-gray-600 {
+            color: #94a3b8 !important;
+        }
+        
+        .dark-mode .border-gray-200 {
+            border-color: #334155 !important;
+        }
+        
+        .dark-mode .hover\:bg-gray-100:hover {
+            background: linear-gradient(135deg, #334155 0%, #475569 100%) !important;
+        }
+        
+        /* Mobile Responsive Enhancements */
+        @media (max-width: 768px) {
+            .video-container {
+                padding-bottom: 56.25%;
+            }
+            
+            .grid-cols-1.lg\:grid-cols-3 {
+                grid-template-columns: 1fr;
+            }
+            
+            .grid-cols-1.lg\:grid-cols-2 {
+                grid-template-columns: 1fr;
+            }
+            
+            .grid-cols-1.md\:grid-cols-2 {
+                grid-template-columns: 1fr;
+            }
+            
+            .lesson-view-header {
+                padding: 0 1rem;
+            }
+            
+            .lesson-view-header .space-x-reverse {
+                margin-left: 0.5rem;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .text-2xl {
+                font-size: 1.5rem;
+            }
+            
+            .text-xl {
+                font-size: 1.25rem;
+            }
+            
+            .text-lg {
+                font-size: 1.125rem;
+            }
+            
+            .p-6 {
+                padding: 1rem;
+            }
+            
+            .p-4 {
+                padding: 0.75rem;
+            }
+            
+            .px-6 {
+                padding-left: 0.75rem;
+                padding-right: 0.75rem;
+            }
+            
+            .py-3 {
+                padding-top: 0.75rem;
+                padding-bottom: 0.75rem;
+            }
+            
+            .lesson-view-header {
+                padding: 0 0.5rem;
+            }
+            
+            .lesson-view-header .space-x-reverse {
+                margin-left: 0.25rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .text-2xl {
+                font-size: 1.25rem;
+            }
+            
+            .text-xl {
+                font-size: 1.125rem;
+            }
+            
+            .text-lg {
+                font-size: 1rem;
+            }
+            
+            .p-6 {
+                padding: 0.75rem;
+            }
+            
+            .px-6 {
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
+            }
+            
+            .py-3 {
+                padding-top: 0.5rem;
+                padding-bottom: 0.5rem;
+            }
+            
+            .lesson-view-header {
+                padding: 0 0.25rem;
+            }
+            
+            .lesson-view-header .space-x-reverse {
+                margin-left: 0.125rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="glass-morphism shadow-lg fixed top-0 left-0 right-0 z-30 lesson-view-header">
+        <div class="px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <button onclick="goBack()" class="p-2 rounded-lg text-white hover:bg-white/20 transition-all duration-200 ml-4">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                        </svg>
+                    </button>
+                    <div class="flex items-center">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/almudir.firebasestorage.app/o/douroussi%2FLogo-douroussi-2024.svg?alt=media&token=74a1e52d-cd23-4709-9605-d6f627f9d05b" alt="واد الرمان" class="h-8 w-auto">
+                    </div>
+                </div>
+                <div class="flex items-center space-x-reverse space-x-4">
+                    <button onclick="toggleDarkMode()" class="p-2 rounded-full text-white hover:bg-white/20 transition-all duration-200">
+                        <i id="themeIcon" class="fas fa-moon text-xl"></i>
+                    </button>
+                    <button onclick="toggleFullscreen()" class="p-2 rounded-full text-white hover:bg-white/20 transition-all duration-200">
+                        <i class="fas fa-expand text-xl"></i>
+                    </button>
+                    <div class="relative">
+                        <button class="flex items-center space-x-reverse space-x-3 text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            <img id="user-avatar" class="h-8 w-8 rounded-full" src="https://picsum.photos/seed/user/40/40.jpg" alt="صورة المستخدم">
+                            <div class="hidden md:block text-right">
+                                <span id="user-name" class="font-medium text-white">المستخدم</span>
+                                <span class="block text-xs text-blue-200">طالب</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pt-20 pb-8 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <!-- Video Section -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+                <!-- Main Video -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/JRvHI1MWY6w" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allowfullscreen> </iframe>
+                        </div>
+                        
+                        <!-- Video Info -->
+                        <div class="p-6">
+                            <div class="flex items-start justify-between mb-4">
+                                <div>
+                                    <h1 class="text-2xl font-bold text-gray-900 mb-2">كل ما يخص اللغة العربية السنة الرابعة ابتدائي الفصل الاول برنامج الدروس مع الوضعيات المقررة</h1>
+                                    <div class="flex items-center space-x-reverse space-x-4 text-sm text-gray-600">
+                                        <span class="flex items-center">
+                                            <i class="fas fa-user ml-2"></i>
+                                            الأستاذ أحمد محمد
+                                        </span>
+                                        <span class="flex items-center">
+                                            <i class="fas fa-clock ml-2"></i>
+                                            45 دقيقة
+                                        </span>
+                                        <span class="flex items-center">
+                                            <i class="fas fa-eye ml-2"></i>
+                                            1,234 مشاهدة
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="flex space-x-reverse space-x-2">
+                                    <button class="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
+                                        <i class="fas fa-thumbs-up text-gray-600"></i>
+                                    </button>
+                                    <button class="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
+                                        <i class="fas fa-share text-gray-600"></i>
+                                    </button>
+                                    <button class="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors">
+                                        <i class="fas fa-bookmark text-gray-600"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Progress Bar -->
+                            <div class="mb-6">
+                                <div class="flex justify-between text-sm text-gray-600 mb-2">
+                                    <span>التقدم</span>
+                                    <span>65%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-gradient-to-r from-emerald-500 to-emerald-600 h-2 rounded-full transition-all duration-500" style="width: 65%"></div>
+                                </div>
+                            </div>
+                            
+                            <!-- Description -->
+                            <div class="mb-6">
+                                <h3 class="text-lg font-semibold text-gray-900 mb-3">وصف الدرس</h3>
+                                <p class="text-gray-700 leading-relaxed">
+                                    هذا الدرس يقدم مقدمة شاملة في اللغة العربية للمستوى الابتدائي. سنتعلم أساسيات القراءة والكتابة، 
+                                    الحروف والأصوات، والكلمات الأساسية. الدرس مصمم بطريقة تفاعلية وممتعة لتسهيل الفهم والاستيعاب.
+                                </p>
+                            </div>
+                            
+                            <!-- Tags -->
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-sm">مبتدئ</span>
+                                <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm">لغة عربية</span>
+                                <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">ابتدائي</span>
+                                <span class="px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-sm">45 دقيقة</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sidebar -->
+                <div class="lg:col-span-1">
+                    <!-- Course Info -->
+                    <div class="bg-white rounded-2xl shadow-xl p-6 mb-6">
+                        <div class="flex items-center mb-4">
+                            <img src="https://picsum.photos/seed/course/60/60.jpg" alt="الدورة" class="w-12 h-12 rounded-lg ml-3">
+                            <div>
+                                <h3 class="font-semibold text-gray-900">دورة اللغة العربية</h3>
+                                <p class="text-sm text-gray-600">المستوى الابتدائي</p>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-3 mb-6">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">عدد الدروس</span>
+                                <span class="font-semibold">20 درس</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">المدة الإجمالية</span>
+                                <span class="font-semibold">15 ساعة</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">المستوى</span>
+                                <span class="font-semibold">مبتدئ</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">الشهادة</span>
+                                <span class="font-semibold text-emerald-600">متاحة</span>
+                            </div>
+                        </div>
+                        
+                        <button class="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 text-white py-3 rounded-xl hover:from-emerald-600 hover:to-emerald-700 transition-all duration-300 font-semibold">
+                            إكمال الدورة
+                        </button>
+                    </div>
+                    
+                    <!-- Lessons List -->
+                    <div class="bg-white rounded-2xl shadow-xl p-6">
+                        <h3 class="font-semibold text-gray-900 mb-4">قائمة الدروس</h3>
+                        <div class="space-y-3 max-h-96 overflow-y-auto">
+                            <div class="lesson-card bg-emerald-50 border border-emerald-200 rounded-lg p-3 cursor-pointer">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 bg-emerald-500 rounded-full flex items-center justify-center text-white text-sm font-bold ml-3">
+                                        1
+                                    </div>
+                                    <div class="flex-1">
+                                        <h4 class="font-semibold text-gray-900 text-sm">مقدمة في اللغة العربية</h4>
+                                        <p class="text-xs text-gray-600">45 دقيقة</p>
+                                    </div>
+                                    <i class="fas fa-play text-emerald-500"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="lesson-card bg-gray-50 border border-gray-200 rounded-lg p-3 cursor-pointer hover:bg-gray-100">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 bg-gray-400 rounded-full flex items-center justify-center text-white text-sm font-bold ml-3">
+                                        2
+                                    </div>
+                                    <div class="flex-1">
+                                        <h4 class="font-semibold text-gray-900 text-sm">الحروف والأصوات</h4>
+                                        <p class="text-xs text-gray-600">30 دقيقة</p>
+                                    </div>
+                                    <i class="fas fa-lock text-gray-400"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="lesson-card bg-gray-50 border border-gray-200 rounded-lg p-3 cursor-pointer hover:bg-gray-100">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 bg-gray-400 rounded-full flex items-center justify-center text-white text-sm font-bold ml-3">
+                                        3
+                                    </div>
+                                    <div class="flex-1">
+                                        <h4 class="font-semibold text-gray-900 text-sm">الكلمات الأساسية</h4>
+                                        <p class="text-xs text-gray-600">35 دقيقة</p>
+                                    </div>
+                                    <i class="fas fa-lock text-gray-400"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="lesson-card bg-gray-50 border border-gray-200 rounded-lg p-3 cursor-pointer hover:bg-gray-100">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 bg-gray-400 rounded-full flex items-center justify-center text-white text-sm font-bold ml-3">
+                                        4
+                                    </div>
+                                    <div class="flex-1">
+                                        <h4 class="font-semibold text-gray-900 text-sm">الجمل البسيطة</h4>
+                                        <p class="text-xs text-gray-600">40 دقيقة</p>
+                                    </div>
+                                    <i class="fas fa-lock text-gray-400"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Additional Content -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Resources -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-2xl shadow-xl p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-6">الموارد التعليمية</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="border border-gray-200 rounded-lg p-4 hover:border-emerald-500 transition-colors cursor-pointer">
+                                <div class="flex items-center mb-3">
+                                    <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center ml-3">
+                                        <i class="fas fa-file-pdf text-blue-600"></i>
+                                    </div>
+                                    <h4 class="font-semibold text-gray-900">ملخص الدرس</h4>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-3">ملخص شامل لمحتوى الدرس</p>
+                                <button class="text-emerald-600 hover:text-emerald-700 text-sm font-semibold">
+                                    تحميل <i class="fas fa-download mr-1"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="border border-gray-200 rounded-lg p-4 hover:border-emerald-500 transition-colors cursor-pointer">
+                                <div class="flex items-center mb-3">
+                                    <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center ml-3">
+                                        <i class="fas fa-tasks text-purple-600"></i>
+                                    </div>
+                                    <h4 class="font-semibold text-gray-900">تمارين تطبيقية</h4>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-3">تمارين لتطبيق ما تعلمته</p>
+                                <button class="text-emerald-600 hover:text-emerald-700 text-sm font-semibold">
+                                    عرض <i class="fas fa-arrow-left mr-1"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="border border-gray-200 rounded-lg p-4 hover:border-emerald-500 transition-colors cursor-pointer">
+                                <div class="flex items-center mb-3">
+                                    <div class="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center ml-3">
+                                        <i class="fas fa-question-circle text-amber-600"></i>
+                                    </div>
+                                    <h4 class="font-semibold text-gray-900">اختبار قصير</h4>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-3">اختبر معرفتك بالدرس</p>
+                                <button class="text-emerald-600 hover:text-emerald-700 text-sm font-semibold">
+                                    بدء الاختبار <i class="fas fa-play mr-1"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="border border-gray-200 rounded-lg p-4 hover:border-emerald-500 transition-colors cursor-pointer">
+                                <div class="flex items-center mb-3">
+                                    <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center ml-3">
+                                        <i class="fas fa-certificate text-red-600"></i>
+                                    </div>
+                                    <h4 class="font-semibold text-gray-900">الشهادة</h4>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-3">احصل على شهادة إتمام الدرس</p>
+                                <button class="text-emerald-600 hover:text-emerald-700 text-sm font-semibold">
+                                    طلب الشهادة <i class="fas fa-award mr-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Instructor Info -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-2xl shadow-xl p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-6">معلومات المعلم</h3>
+                        <div class="text-center mb-6">
+                            <img src="https://picsum.photos/seed/instructor/120/120.jpg" alt="المعلم" class="w-20 h-20 rounded-full mx-auto mb-4">
+                            <h4 class="font-semibold text-gray-900">الأستاذ أحمد محمد</h4>
+                            <p class="text-sm text-gray-600">خبير في اللغة العربية</p>
+                        </div>
+                        
+                        <div class="space-y-3 mb-6">
+                            <div class="flex items-center text-sm">
+                                <i class="fas fa-graduation-cap text-gray-400 ml-3"></i>
+                                <span class="text-gray-600">خبرة 10 سنوات</span>
+                            </div>
+                            <div class="flex items-center text-sm">
+                                <i class="fas fa-book text-gray-400 ml-3"></i>
+                                <span class="text-gray-600">أكثر من 500 طالب</span>
+                            </div>
+                            <div class="flex items-center text-sm">
+                                <i class="fas fa-star text-yellow-400 ml-3"></i>
+                                <span class="text-gray-600">تقييم 4.8/5.0</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex space-x-reverse space-x-2">
+                            <button class="flex-1 bg-emerald-500 text-white py-2 rounded-lg hover:bg-emerald-600 transition-colors text-sm">
+                                متابعة
+                            </button>
+                            <button class="flex-1 bg-gray-200 text-gray-700 py-2 rounded-lg hover:bg-gray-300 transition-colors text-sm">
+                                رسالة
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Comments Section -->
+            <div class="mt-8">
+                <div class="bg-white rounded-2xl shadow-xl p-6">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-6">التعليقات والمناقشة</h3>
+                    
+                    <!-- Add Comment -->
+                    <div class="mb-6">
+                        <div class="flex items-start space-x-reverse space-x-3">
+                            <img src="https://picsum.photos/seed/currentuser/40/40.jpg" alt="المستخدم" class="w-10 h-10 rounded-full">
+                            <div class="flex-1">
+                                <textarea 
+                                    placeholder="أضف تعليقك..." 
+                                    class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-none"
+                                    rows="3"></textarea>
+                                <div class="flex justify-between items-center mt-2">
+                                    <div class="flex space-x-reverse space-x-2">
+                                        <button class="p-2 text-gray-500 hover:text-emerald-600 transition-colors">
+                                            <i class="fas fa-smile"></i>
+                                        </button>
+                                        <button class="p-2 text-gray-500 hover:text-emerald-600 transition-colors">
+                                            <i class="fas fa-paperclip"></i>
+                                        </button>
+                                    </div>
+                                    <button class="bg-emerald-500 text-white px-4 py-2 rounded-lg hover:bg-emerald-600 transition-colors text-sm">
+                                        نشر التعليق
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Comments List -->
+                    <div class="space-y-4">
+                        <div class="border-b border-gray-200 pb-4">
+                            <div class="flex items-start space-x-reverse space-x-3">
+                                <img src="https://picsum.photos/seed/user1/40/40.jpg" alt="المستخدم" class="w-10 h-10 rounded-full">
+                                <div class="flex-1">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <h4 class="font-semibold text-gray-900">محمد أحمد</h4>
+                                        <span class="text-xs text-gray-500">منذ ساعتين</span>
+                                    </div>
+                                    <p class="text-gray-700 mb-2">
+                                        درس رائع ومفيد جداً! شرح واضح ومبسط، شكراً للأستاذ على هذا الجهد المميز.
+                                    </p>
+                                    <div class="flex items-center space-x-reverse space-x-4 text-sm">
+                                        <button class="text-gray-500 hover:text-emerald-600 transition-colors">
+                                            <i class="fas fa-thumbs-up ml-1"></i> 12
+                                        </button>
+                                        <button class="text-gray-500 hover:text-emerald-600 transition-colors">
+                                            <i class="fas fa-reply ml-1"></i> رد
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="border-b border-gray-200 pb-4">
+                            <div class="flex items-start space-x-reverse space-x-3">
+                                <img src="https://picsum.photos/seed/user2/40/40.jpg" alt="المستخدم" class="w-10 h-10 rounded-full">
+                                <div class="flex-1">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <h4 class="font-semibold text-gray-900">فاطمة علي</h4>
+                                        <span class="text-xs text-gray-500">منذ 5 ساعات</span>
+                                    </div>
+                                    <p class="text-gray-700 mb-2">
+                                        هل يمكن الحصول على ملف PDF للدرس؟ المحتوى ممتاز وأود مراجعته لاحقاً.
+                                    </p>
+                                    <div class="flex items-center space-x-reverse space-x-4 text-sm">
+                                        <button class="text-gray-500 hover:text-emerald-600 transition-colors">
+                                            <i class="fas fa-thumbs-up ml-1"></i> 8
+                                        </button>
+                                        <button class="text-gray-500 hover:text-emerald-600 transition-colors">
+                                            <i class="fas fa-reply ml-1"></i> رد
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Floating Action Button -->
+    <div class="fixed bottom-6 left-6 z-20">
+        <button class="bg-emerald-500 text-white p-4 rounded-full shadow-lg hover:bg-emerald-600 transition-all duration-300 floating-animation">
+            <i class="fas fa-headset text-xl"></i>
+        </button>
+    </div>
+
+    <script>
+        // Dark Mode Toggle
+        function toggleDarkMode() {
+            const body = document.body;
+            const themeIcon = document.getElementById('themeIcon');
+            
+            body.classList.toggle('dark-mode');
+            
+            if (body.classList.contains('dark-mode')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        }
+
+        // Fullscreen Toggle
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+
+        // Go Back
+        function goBack() {
+            window.history.back();
+        }
+
+        // Load User Data
+        function loadUserData() {
+            const userName = localStorage.getItem('userName');
+            const userAvatar = localStorage.getItem('userAvatar');
+            
+            if (userName) {
+                document.getElementById('user-name').textContent = userName;
+            }
+            
+            if (userAvatar) {
+                document.getElementById('user-avatar').src = userAvatar;
+            }
+        }
+
+        // Check Dark Mode on Load
+        function checkDarkMode() {
+            const darkMode = localStorage.getItem('darkMode');
+            const themeIcon = document.getElementById('themeIcon');
+            
+            if (darkMode === 'enabled') {
+                document.body.classList.add('dark-mode');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadUserData();
+            checkDarkMode();
+        });
+
+        // Video Progress Tracking
+        let videoProgress = 0;
+        function updateVideoProgress(progress) {
+            videoProgress = progress;
+            // Save progress to localStorage
+            localStorage.setItem('videoProgress', progress);
+        }
+
+        // Lesson Navigation
+        function selectLesson(lessonNumber) {
+            // Update UI to show selected lesson
+            const lessons = document.querySelectorAll('.lesson-card');
+            lessons.forEach((lesson, index) => {
+                if (index === lessonNumber - 1) {
+                    lesson.classList.add('bg-emerald-50', 'border-emerald-200');
+                    lesson.classList.remove('bg-gray-50', 'border-gray-200');
+                } else {
+                    lesson.classList.remove('bg-emerald-50', 'border-emerald-200');
+                    lesson.classList.add('bg-gray-50', 'border-gray-200');
+                }
+            });
+        }
+
+        // Comment System
+        function addComment() {
+            const textarea = document.querySelector('textarea');
+            const comment = textarea.value.trim();
+            
+            if (comment) {
+                // Add comment logic here
+                console.log('Adding comment:', comment);
+                textarea.value = '';
+            }
+        }
+
+        // Resource Download
+        function downloadResource(resourceName) {
+            console.log('Downloading resource:', resourceName);
+            // Implement download logic
+        }
+
+        // Keyboard Shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Space bar to play/pause video
+            if (e.code === 'Space' && e.target.tagName !== 'TEXTAREA' && e.target.tagName !== 'INPUT') {
+                e.preventDefault();
+                // Toggle video play/pause
+            }
+            
+            // Escape to exit fullscreen
+            if (e.code === 'Escape' && document.fullscreenElement) {
+                document.exitFullscreen();
+            }
+            
+            // Ctrl/Cmd + D for dark mode
+            if ((e.ctrlKey || e.metaKey) && e.code === 'KeyD') {
+                e.preventDefault();
+                toggleDarkMode();
+            }
+        });
+    </script>
+</body>
+</html>

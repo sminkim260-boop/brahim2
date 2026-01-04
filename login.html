@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة واد الرمان التعليمية</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+        }
+        
+        /* Mobile Responsive Enhancements */
+        @media (max-width: 768px) {
+            .login-container {
+                padding: 1rem;
+            }
+            
+            .login-card {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tab-container {
+                flex-direction: column;
+            }
+            
+            .tab-button {
+                width: 100%;
+                margin-bottom: 0.5rem;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .login-card {
+                margin: 0.5rem;
+                padding: 1rem;
+            }
+            
+            .text-2xl {
+                font-size: 1.5rem;
+            }
+            
+            .text-xl {
+                font-size: 1.25rem;
+            }
+            
+            .p-8 {
+                padding: 1rem;
+            }
+            
+            .px-8 {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .login-card {
+                margin: 0.25rem;
+                padding: 0.75rem;
+            }
+            
+            .text-2xl {
+                font-size: 1.25rem;
+            }
+            
+            .text-xl {
+                font-size: 1.125rem;
+            }
+            
+            .p-8 {
+                padding: 0.75rem;
+            }
+            
+            .px-8 {
+                padding-left: 0.75rem;
+                padding-right: 0.75rem;
+            }
+        }
+        
+        /* Dark Mode Styles */
+        body.dark {
+            background-color: #0f172a;
+            color: #f1f5f9;
+        }
+        body.dark .bg-white {
+            background-color: #1e293b !important;
+        }
+        body.dark .bg-gray-50 {
+            background-color: #0f172a !important;
+        }
+        body.dark .text-gray-900 {
+            color: #f1f5f9 !important;
+        }
+        body.dark .text-gray-600 {
+            color: #94a3b8 !important;
+        }
+        body.dark .text-gray-700 {
+            color: #e2e8f0 !important;
+        }
+        body.dark .text-gray-500 {
+            color: #64748b !important;
+        }
+        body.dark .border-gray-200 {
+            border-color: #334155 !important;
+        }
+        body.dark .border-gray-300 {
+            border-color: #334155 !important;
+        }
+        body.dark .bg-gray-100 {
+            background-color: #334155 !important;
+        }
+        body.dark .hover\:bg-gray-100:hover {
+            background-color: #475569 !important;
+        }
+        body.dark .hover\:bg-gray-50:hover {
+            background-color: #475569 !important;
+        }
+        body.dark .shadow-lg {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3) !important;
+        }
+        body.dark .shadow {
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.4), 0 1px 2px 0 rgba(0, 0, 0, 0.2) !important;
+        }
+        body.dark input, body.dark textarea, body.dark select {
+            background-color: #334155 !important;
+            color: #f1f5f9 !important;
+            border-color: #475569 !important;
+        }
+        
+        /* Login Modal Responsive */
+        @media (max-width: 768px) {
+            .login-modal {
+                margin: 1rem;
+                max-width: calc(100vw - 2rem);
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .login-modal {
+                margin: 0.5rem;
+                max-width: calc(100vw - 1rem);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .login-modal {
+                margin: 0.25rem;
+                max-width: calc(100vw - 0.5rem);
+            }
+        }
+        
+        /* Enhanced Animations */
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+        
+        @keyframes shimmer {
+            0% {
+                background-position: -200% 0;
+            }
+            100% {
+                background-position: 200% 0;
+            }
+        }
+        
+        .animate-slide-in {
+            animation: slideInRight 0.5s ease-out;
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        .animate-pulse-hover:hover {
+            animation: pulse 0.3s ease-in-out;
+        }
+        
+        /* Enhanced Header */
+        .enhanced-header {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Enhanced Cards */
+        .enhanced-card {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .enhanced-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+        }
+        
+        /* Enhanced Buttons */
+        .enhanced-btn {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+        }
+        
+        .enhanced-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .enhanced-btn:hover::before {
+            left: 100%;
+        }
+        
+        .enhanced-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 30px rgba(59, 130, 246, 0.6);
+        }
+        
+        /* Enhanced Tabs */
+        .enhanced-tab {
+            background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .enhanced-tab.active {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            color: white;
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5);
+            border-color: transparent;
+        }
+        
+        /* Enhanced Form Elements */
+        .enhanced-input {
+            background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            color: #f3f4f6;
+        }
+        
+        .enhanced-input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 5px rgba(59, 130, 246, 0.3), 0 0 20px rgba(59, 130, 246, 0.2);
+            transform: translateY(-2px);
+            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+        }
+        
+        /* Enhanced Role Buttons */
+        .role-btn {
+            background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            color: #f3f4f6;
+        }
+        
+        .role-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .role-btn.active {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5);
+        }
+        
+        /* Feature Cards */
+        .feature-card {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s;
+        }
+        
+        .feature-card:hover::before {
+            top: -100%;
+            right: -100%;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .enhanced-card {
+                margin: 0.5rem;
+            }
+        }
+        
+        /* Tab Styles */
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-50">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur shadow-sm enhanced-header animate-slide-in">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex h-16 items-center justify-between">
+                <a class="flex items-center space-x-2" href="index.html">
+                    <img alt="واد الرمان Logo" width="150" height="55" class="h-auto" src="https://firebasestorage.googleapis.com/v0/b/almudir.firebasestorage.app/o/douroussi%2FLogo-douroussi-2024.svg?alt=media&token=74a1e52d-cd23-4709-9605-d6f627f9d05b"/>
+                </a>
+                <div class="flex items-center space-x-reverse space-x-4">
+                    <button onclick="toggleDarkMode()" class="p-2 rounded-full text-gray-600 hover:text-gray-900 hover:bg-gray-100">
+                        <i id="themeIcon" class="fas fa-moon text-xl"></i>
+                    </button>
+                    <a href="index.html" class="text-sm text-gray-600 hover:text-gray-900">
+                        <i class="fas fa-home ml-2"></i>
+                        الرئيسية
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1">
+        <!-- Hero Section -->
+        <section class="py-16 text-center sm:py-20">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h1 class="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl text-gray-900 fade-in">مرحباً بك في منصة واد الرمان التعليمية</h1>
+                <p class="mx-auto mt-4 max-w-2xl text-lg text-gray-600 fade-in">نقدم لك تجربة تعليمية فريدة ومخصصة تساعدك على تحقيق أهدافك الدراسية بكفاءة وسهولة.</p>
+            </div>
+        </section>
+
+        <!-- Login/Register Section -->
+        <section class="py-8 sm:py-12">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-md mx-auto">
+                    <!-- Tab Buttons -->
+                    <div class="flex mb-8 bg-gray-100 rounded-lg p-1 enhanced-tab">
+                        <button onclick="switchTab('login')" id="loginTab" class="flex-1 py-2 px-4 text-center rounded-md font-medium transition-colors enhanced-tab active">
+                            تسجيل الدخول
+                        </button>
+                        <button onclick="switchTab('register')" id="registerTab" class="flex-1 py-2 px-4 text-center rounded-md font-medium transition-colors enhanced-tab">
+                            إنشاء حساب
+                        </button>
+                    </div>
+
+                    <!-- Login Form -->
+                    <div id="loginContent" class="tab-content active">
+                        <div class="bg-white rounded-lg shadow-lg p-8 enhanced-card animate-fade-in-up login-modal">
+                            <h2 class="text-2xl font-bold text-center mb-6 text-gray-900">تسجيل الدخول</h2>
+                            <form onsubmit="handleLogin(event)">
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">البريد الإلكتروني</label>
+                                        <div class="relative">
+                                            <input type="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 pr-10" placeholder="أدخل بريدك الإلكتروني">
+                                            <i class="fas fa-envelope absolute left-3 top-3.5 text-gray-400"></i>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">اختر دورك</label>
+                                        <div class="grid grid-cols-3 gap-2">
+                                            <button type="button" onclick="selectRole('admin')" id="adminBtn" class="role-btn py-2 px-3 border border-gray-300 rounded-lg text-sm font-medium hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                                <i class="fas fa-user-shield ml-1"></i>
+                                                مدير
+                                            </button>
+                                            <button type="button" onclick="selectRole('supervisor')" id="supervisorBtn" class="role-btn py-2 px-3 border border-gray-300 rounded-lg text-sm font-medium hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                                <i class="fas fa-user-tie ml-1"></i>
+                                                مشرف
+                                            </button>
+                                            <button type="button" onclick="selectRole('student')" id="studentBtn" class="role-btn py-2 px-3 border border-gray-300 rounded-lg text-sm font-medium hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                                <i class="fas fa-user ml-1"></i>
+                                                طالب
+                                            </button>
+                                        </div>
+                                        <input type="hidden" id="selectedRole" name="role" required>
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">كلمة المرور</label>
+                                        <div class="relative">
+                                            <input type="password" id="loginPassword" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 pr-20 enhanced-input" placeholder="أدخل كلمة المرور">
+                                            <i class="fas fa-lock absolute left-3 top-3.5 text-gray-400"></i>
+                                            <button type="button" onclick="togglePassword('loginPassword')" class="absolute right-3 top-3.5 text-gray-400 hover:text-gray-600">
+                                                <i id="loginPassword-icon" class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="flex items-center justify-between">
+                                        <label class="flex items-center">
+                                            <input type="checkbox" class="ml-2 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                            <span class="text-sm text-gray-600">تذكرني</span>
+                                        </label>
+                                        <a href="#" class="text-sm text-indigo-600 hover:text-indigo-800">نسيت كلمة المرور؟</a>
+                                    </div>
+                                    
+                                    <button type="submit" class="w-full bg-indigo-600 text-white py-3 rounded-lg font-medium hover:bg-indigo-700 transition-colors">
+                                        تسجيل الدخول
+                                    </button>
+                                </div>
+                            </form>
+                            
+                            <div class="mt-6 text-center">
+                                <p class="text-sm text-gray-600">
+                                    ليس لديك حساب؟
+                                    <a href="#" onclick="switchTab('register')" class="text-indigo-600 hover:text-indigo-800 font-medium">إنشاء حساب جديد</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Register Form -->
+                    <div id="registerContent" class="tab-content">
+                        <div class="bg-white rounded-lg shadow-lg p-8 enhanced-card animate-fade-in-up login-modal">
+                            <h2 class="text-2xl font-bold text-center mb-6 text-gray-900">إنشاء حساب جديد</h2>
+                            <form onsubmit="handleRegister(event)">
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">الاسم الكامل</label>
+                                        <div class="relative">
+                                            <input type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 pr-10 enhanced-input" placeholder="أدخل اسمك الكامل">
+                                            <i class="fas fa-user absolute left-3 top-3.5 text-gray-400"></i>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">البريد الإلكتروني</label>
+                                        <div class="relative">
+                                            <input type="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 pr-10" placeholder="أدخل بريدك الإلكتروني">
+                                            <i class="fas fa-envelope absolute left-3 top-3.5 text-gray-400"></i>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">اختر دورك</label>
+                                        <div class="grid grid-cols-1 gap-2">
+                                            <button type="button" onclick="selectRegisterRole('student')" id="studentRegBtn" class="role-btn py-2 px-3 border border-gray-300 rounded-lg text-sm font-medium hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                                <i class="fas fa-user ml-1"></i>
+                                                طالب
+                                            </button>
+                                        </div>
+                                        <input type="hidden" id="selectedRegisterRole" name="role" value="student" required>
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">المستوى التعليمي</label>
+                                        <div class="relative">
+                                            <select required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 pr-10 appearance-none enhanced-input">
+                                                <option value="">اختر مستواك التعليمي</option>
+                                                <option value="primary">ابتدائي</option>
+                                                <option value="middle">متوسط</option>
+                                            </select>
+                                            <i class="fas fa-graduation-cap absolute left-3 top-3.5 text-gray-400"></i>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">كلمة المرور</label>
+                                        <div class="relative">
+                                            <input type="password" id="password" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 pr-20 enhanced-input" placeholder="أدخل كلمة المرور">
+                                            <i class="fas fa-lock absolute left-3 top-3.5 text-gray-400"></i>
+                                            <button type="button" onclick="togglePassword('password')" class="absolute right-3 top-3.5 text-gray-400 hover:text-gray-600">
+                                                <i id="password-icon" class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">تأكيد كلمة المرور</label>
+                                        <div class="relative">
+                                            <input type="password" id="confirmPassword" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 pr-20 enhanced-input" placeholder="أعد إدخال كلمة المرور">
+                                            <i class="fas fa-lock absolute left-3 top-3.5 text-gray-400"></i>
+                                            <button type="button" onclick="togglePassword('confirmPassword')" class="absolute right-3 top-3.5 text-gray-400 hover:text-gray-600">
+                                                <i id="confirmPassword-icon" class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="flex items-center">
+                                        <input type="checkbox" required class="ml-2 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                        <span class="text-sm text-gray-600">
+                                            أوافق على 
+                                            <a href="#" class="text-indigo-600 hover:text-indigo-800">الشروط والأحكام</a>
+                                            و
+                                            <a href="#" class="text-indigo-600 hover:text-indigo-800">سياسة الخصوصية</a>
+                                        </span>
+                                    </div>
+                                    
+                                    <button type="submit" class="w-full bg-indigo-600 text-white py-3 rounded-lg font-medium hover:bg-indigo-700 transition-colors">
+                                        إنشاء حساب
+                                    </button>
+                                </div>
+                            </form>
+                            
+                            <div class="mt-6 text-center">
+                                <p class="text-sm text-gray-600">
+                                    لديك حساب بالفعل؟
+                                    <a href="#" onclick="switchTab('login')" class="text-indigo-600 hover:text-indigo-800 font-medium">تسجيل الدخول</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="bg-gray-100 py-16 sm:py-20">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <h2 class="text-2xl font-bold sm:text-3xl text-gray-900">لماذا تختار منصة واد الرمان؟</h2>
+                    <p class="mt-2 text-gray-600">كل ما تحتاجه للنجاح في مسارك الدراسي في مكان واحد.</p>
+                </div>
+                <div class="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+                    <div class="rounded-lg border bg-white text-card-foreground shadow-sm flex flex-col text-center p-6">
+                        <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-indigo-100">
+                            <i class="fas fa-radio text-indigo-600 text-xl"></i>
+                        </div>
+                        <div class="text-lg md:text-xl font-semibold mt-4 text-gray-900">الدروس المباشرة</div>
+                        <p class="text-gray-600 mt-2">تفاعل مباشر مع أفضل الأساتذة لطرح الأسئلة والنقاش.</p>
+                    </div>
+                    
+                    <div class="rounded-lg border bg-white text-card-foreground shadow-sm flex flex-col text-center p-6">
+                        <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-indigo-100">
+                            <i class="fas fa-video text-indigo-600 text-xl"></i>
+                        </div>
+                        <div class="text-lg md:text-xl font-semibold mt-4 text-gray-900">ملخصات شاملة</div>
+                        <p class="text-gray-600 mt-2">ملخصات موجزة ومباشرة للمعلومات الأساسية، مصممة للقراءة السريعة والمبسطة.</p>
+                    </div>
+                    
+                    <div class="rounded-lg border bg-white text-card-foreground shadow-sm flex flex-col text-center p-6">
+                        <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-indigo-100">
+                            <i class="fas fa-brain text-indigo-600 text-xl"></i>
+                        </div>
+                        <div class="text-lg md:text-xl font-semibold mt-4 text-gray-900">حلول تمرينات ذكية</div>
+                        <p class="text-gray-600 mt-2">حلول بالذكاء الاصطناعي بواسطة أدوات احترافية مخصصة للدراسة.</p>
+                    </div>
+                    
+                    <div class="rounded-lg border bg-white text-card-foreground shadow-sm flex flex-col text-center p-6">
+                        <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-indigo-100">
+                            <i class="fas fa-bullseye text-indigo-600 text-xl"></i>
+                        </div>
+                        <div class="text-lg md:text-xl font-semibold mt-4 text-gray-900">متابعة التقدم</div>
+                        <p class="text-gray-600 mt-2">أدوات لمتابعة تقدمك الدراسي وتحديد نقاط القوة والضعف.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t bg-gray-100">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col items-center justify-between gap-4 py-8 md:flex-row">
+                <a class="flex items-center gap-2" href="index.html">
+                    <img alt="واد الرمان Logo" width="150" height="55" class="h-auto" src="https://firebasestorage.googleapis.com/v0/b/almudir.firebasestorage.app/o/douroussi%2FLogo-douroussi-2024.svg?alt=media&token=74a1e52d-cd23-4709-9605-d6f627f9d05b"/>
+                </a>
+                <p class="text-sm text-gray-600">© 2025 واد الرمان. جميع الحقوق محفوظة.</p>
+                <div class="flex items-center gap-4">
+                    <a class="text-sm text-gray-600 hover:text-gray-900" href="#">سياسة الخصوصية</a>
+                    <a class="text-sm text-gray-600 hover:text-gray-900" href="#">شروط الاستخدام</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tab Switching
+        function switchTab(tab) {
+            const loginTab = document.getElementById('loginTab');
+            const registerTab = document.getElementById('registerTab');
+            const loginContent = document.getElementById('loginContent');
+            const registerContent = document.getElementById('registerContent');
+            
+            if (tab === 'login') {
+                loginTab.classList.add('bg-white', 'text-indigo-600', 'shadow');
+                loginTab.classList.remove('text-gray-600');
+                registerTab.classList.remove('bg-white', 'text-indigo-600', 'shadow');
+                registerTab.classList.add('text-gray-600');
+                
+                loginContent.classList.add('active');
+                registerContent.classList.remove('active');
+            } else {
+                registerTab.classList.add('bg-white', 'text-indigo-600', 'shadow');
+                registerTab.classList.remove('text-gray-600');
+                loginTab.classList.remove('bg-white', 'text-indigo-600', 'shadow');
+                loginTab.classList.add('text-gray-600');
+                
+                registerContent.classList.add('active');
+                loginContent.classList.remove('active');
+            }
+        }
+        
+        // Dark Mode Toggle
+        function toggleDarkMode() {
+            const body = document.body;
+            const themeIcon = document.getElementById('themeIcon');
+            
+            body.classList.toggle('dark');
+            
+            if (body.classList.contains('dark')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        }
+        
+        // Check Dark Mode on Load
+        function checkDarkMode() {
+            const darkMode = localStorage.getItem('darkMode');
+            const themeIcon = document.getElementById('themeIcon');
+            
+            if (darkMode === 'enabled') {
+                document.body.classList.add('dark');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            }
+        }
+        
+        // Role Selection
+        function selectRole(role) {
+            // Remove active class from all login buttons
+            document.querySelectorAll('#loginContent .role-btn').forEach(btn => {
+                btn.classList.remove('bg-indigo-600', 'text-white', 'border-indigo-600');
+                btn.classList.add('border-gray-300');
+            });
+            
+            // Add active class to selected button
+            const selectedBtn = document.getElementById(role + 'Btn');
+            selectedBtn.classList.add('bg-indigo-600', 'text-white', 'border-indigo-600');
+            selectedBtn.classList.remove('border-gray-300');
+            
+            // Set hidden input value
+            document.getElementById('selectedRole').value = role;
+        }
+        
+        // Role Selection for Registration
+        function selectRegisterRole(role) {
+            // Since only student role is available, automatically select it
+            if (role !== 'student') {
+                return;
+            }
+            
+            // Remove active class from all register buttons
+            document.querySelectorAll('#registerContent .role-btn').forEach(btn => {
+                btn.classList.remove('bg-indigo-600', 'text-white', 'border-indigo-600');
+                btn.classList.add('border-gray-300');
+            });
+            
+            // Add active class to selected button
+            const selectedBtn = document.getElementById(role + 'RegBtn');
+            selectedBtn.classList.add('bg-indigo-600', 'text-white', 'border-indigo-600');
+            selectedBtn.classList.remove('border-gray-300');
+            
+            // Set hidden input value
+            document.getElementById('selectedRegisterRole').value = role;
+        }
+        
+        // Password Visibility Toggle
+        function togglePassword(fieldId) {
+            const passwordField = document.getElementById(fieldId);
+            const iconField = document.getElementById(fieldId + '-icon');
+            
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                iconField.classList.remove('fa-eye');
+                iconField.classList.add('fa-eye-slash');
+            } else {
+                passwordField.type = 'password';
+                iconField.classList.remove('fa-eye-slash');
+                iconField.classList.add('fa-eye');
+            }
+        }
+        
+        // Form Handlers
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            // Get form data
+            const email = event.target.querySelector('input[type="email"]').value;
+            const password = document.getElementById('loginPassword').value;
+            const selectedRole = document.getElementById('selectedRole').value;
+            
+            if (!selectedRole) {
+                alert('يرجى اختيار دورك (مدير، مشرف، أو طالب)');
+                return;
+            }
+            
+            // Special admin account check
+            if (selectedRole === 'admin' && email === 'chaouchi@gmail.com' && password === '123456') {
+                // Admin login successful
+                const userName = 'شاوشي إبراهيم';
+                const userAvatar = `https://picsum.photos/seed/shaouchi/100/100.jpg`;
+                
+                // Save admin data to localStorage
+                localStorage.setItem('userName', userName);
+                localStorage.setItem('userEmail', email);
+                localStorage.setItem('userRole', selectedRole);
+                localStorage.setItem('userAvatar', userAvatar);
+                localStorage.setItem('profileImage', userAvatar);
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('userPhone', '');
+                localStorage.setItem('lessonsPassword', 'lessons123');
+                localStorage.setItem('sessionsPassword', 'sessions456');
+                
+                // Show admin permissions panel
+                showPermissionsPanel(selectedRole);
+                return;
+            }
+            
+            // Special supervisor account check
+            if (selectedRole === 'supervisor' && email === 'chaouchi2@gmail.com' && password === '123456') {
+                // Supervisor login successful
+                const userName = 'شاوشي خديجة';
+                const userAvatar = `https://picsum.photos/seed/chaouchi2/100/100.jpg`;
+                
+                // Save supervisor data to localStorage
+                localStorage.setItem('userName', userName);
+                localStorage.setItem('userEmail', email);
+                localStorage.setItem('userRole', selectedRole);
+                localStorage.setItem('userAvatar', userAvatar);
+                localStorage.setItem('profileImage', userAvatar);
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('userPhone', '');
+                localStorage.setItem('lessonsPassword', 'lessons123');
+                localStorage.setItem('sessionsPassword', 'sessions456');
+                
+                // Show supervisor permissions panel
+                showPermissionsPanel(selectedRole);
+                return;
+            }
+            
+            // Regular login for other roles
+            if (selectedRole === 'student') {
+                // Extract name from email (before @)
+                const userName = email.split('@')[0];
+                
+                // Generate avatar based on name
+                const userAvatar = `https://picsum.photos/seed/${userName}/100/100.jpg`;
+                
+                // Save complete user data to localStorage
+                localStorage.setItem('userName', userName);
+                localStorage.setItem('userEmail', email);
+                localStorage.setItem('userRole', selectedRole);
+                localStorage.setItem('userAvatar', userAvatar);
+                localStorage.setItem('profileImage', userAvatar);
+                localStorage.setItem('isLoggedIn', 'true');
+                
+                // Set default values for other fields
+                localStorage.setItem('userPhone', '');
+                localStorage.setItem('lessonsPassword', 'lessons123');
+                localStorage.setItem('sessionsPassword', 'sessions456');
+                
+                // Show role-specific permissions panel
+                showPermissionsPanel(selectedRole);
+            } else if (selectedRole === 'admin') {
+                // Admin login failed (already handled above)
+                alert('بيانات اعتماد المدير غير صحيحة');
+            } else if (selectedRole === 'supervisor') {
+                // Supervisor login failed (already handled above)
+                alert('بيانات اعتماد المشرف غير صحيحة');
+            }
+        }
+        
+        function showPermissionsPanel(role) {
+            let permissionsHTML = '';
+            
+            switch(role) {
+                case 'admin':
+                    permissionsHTML = `
+                        <div class="bg-white rounded-lg shadow-lg p-8 max-w-2xl mx-auto mt-8">
+                            <h3 class="text-2xl font-bold text-center mb-6 text-indigo-800">🛡️ لوحة صلاحيات المدير</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="bg-indigo-50 rounded-lg p-6">
+                                    <h4 class="font-bold text-indigo-800 mb-4">📊 إدارة النظام</h4>
+                                    <ul class="space-y-2 text-sm text-indigo-700">
+                                        <li>✅ التحكم الكامل في المنصة</li>
+                                        <li>✅ إدارة جميع المستخدمين</li>
+                                        <li>✅ الوصول لجميع التقارير</li>
+                                        <li>✅ إعدادات النظام المتقدمة</li>
+                                        <li>✅ النسخ الاحتياطي واستعادة البيانات</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-purple-50 rounded-lg p-6">
+                                    <h4 class="font-bold text-purple-800 mb-4">🔧 التحكم المتقدم</h4>
+                                    <ul class="space-y-2 text-sm text-purple-700">
+                                        <li>✅ حظر وإلغاء حظر المستخدمين</li>
+                                        <li>✅ حذف البيانات بشكل دائم</li>
+                                        <li>✅ إيقاف وتشغيل النظام</li>
+                                        <li>✅ مراقبة الأداء والسجلات</li>
+                                        <li>✅ تصدير واستيراد البيانات</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="mt-6 text-center">
+                                <button onclick="proceedToDashboard()" class="bg-indigo-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-indigo-700 transition-colors">
+                                    الدخول للوحة التحكم
+                                </button>
+                                <button onclick="backToLogin()" class="bg-gray-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-gray-700 transition-colors mr-4">
+                                    العودة
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'supervisor':
+                    permissionsHTML = `
+                        <div class="bg-white rounded-lg shadow-lg p-8 max-w-2xl mx-auto mt-8">
+                            <h3 class="text-2xl font-bold text-center mb-6 text-blue-800">👔 لوحة صلاحيات المشرف</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="bg-blue-50 rounded-lg p-6">
+                                    <h4 class="font-bold text-blue-800 mb-4">📚 إدارة المحتوى</h4>
+                                    <ul class="space-y-2 text-sm text-blue-700">
+                                        <li>✅ إضافة وتعديل الدورات</li>
+                                        <li>✅ إنشاء وإدارة الدروس</li>
+                                        <li>✅ تنظيم الجلسات المباشرة</li>
+                                        <li>✅ رفع وإدارة المواد التعليمية</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-green-50 rounded-lg p-6">
+                                    <h4 class="font-bold text-green-800 mb-4">👥 مراقبة الطلاب</h4>
+                                    <ul class="space-y-2 text-sm text-green-700">
+                                        <li>✅ عرض قائمة الطلاب المسجلين</li>
+                                        <li>✅ متابعة تقدم الطلاب</li>
+                                        <li>✅ تقييم الواجبات والاختبارات</li>
+                                        <li>✅ إنشاء تقارير الأداء</li>
+                                        <li>✅ التواصل مع الطلاب وأولياء الأمور</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="mt-6 text-center">
+                                <button onclick="proceedToDashboard()" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors">
+                                    الدخول للوحة التحكم
+                                </button>
+                                <button onclick="backToLogin()" class="bg-gray-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-gray-700 transition-colors mr-4">
+                                    العودة
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'student':
+                    permissionsHTML = `
+                        <div class="bg-white rounded-lg shadow-lg p-8 max-w-2xl mx-auto mt-8">
+                            <h3 class="text-2xl font-bold text-center mb-6 text-green-800">🎓 منصة الطالب</h3>
+                            <div class="bg-green-50 rounded-lg p-6">
+                                <h4 class="font-bold text-green-800 mb-4">📖 أدوات الطالب</h4>
+                                <ul class="space-y-2 text-sm text-green-700">
+                                    <li>✅ الوصول للدورات المسجلة</li>
+                                    <li>✅ استكمال الدروس والواجبات</li>
+                                    <li>✅ المشاركة في الجلسات المباشرة</li>
+                                    <li>✅ متابعة التقدم الشخصي</li>
+                                    <li>✅ الحصول على الشهادات والإنجازات</li>
+                                    <li>✅ عرض الجدول الدراسي</li>
+                                </ul>
+                                <p class="text-sm text-gray-600 mt-4">* سيتم عرض الأقسام المتاحة للطلاب فقط</p>
+                            </div>
+                            <div class="mt-6 text-center">
+                                <button onclick="proceedToDashboard()" class="bg-green-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-green-700 transition-colors">
+                                    الدخول للمنصة
+                                </button>
+                                <button onclick="backToLogin()" class="bg-gray-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-gray-700 transition-colors mr-4">
+                                    العودة
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    break;
+            }
+            
+            // Hide login form and show permissions panel
+            document.getElementById('loginContent').style.display = 'none';
+            const permissionsPanel = document.createElement('div');
+            permissionsPanel.id = 'permissionsPanel';
+            permissionsPanel.innerHTML = permissionsHTML;
+            document.getElementById('loginContent').parentNode.appendChild(permissionsPanel);
+        }
+        
+        function proceedToDashboard() {
+            alert('تم تسجيل الدخول بنجاح! جاري التحويل إلى لوحة التحكم...');
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1000);
+        }
+        
+        function backToLogin() {
+            document.getElementById('permissionsPanel').remove();
+            document.getElementById('loginContent').style.display = 'block';
+            // Clear selected role
+            document.getElementById('selectedRole').value = '';
+            document.querySelectorAll('.role-btn').forEach(btn => {
+                btn.classList.remove('bg-indigo-600', 'text-white', 'border-indigo-600');
+                btn.classList.add('border-gray-300');
+            });
+        }
+        
+        function handleRegister(event) {
+            event.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(event.target);
+            const userName = formData.get('name') || event.target.querySelector('input[type="text"]').value;
+            const email = formData.get('email') || event.target.querySelector('input[type="email"]').value;
+            const selectedRole = document.getElementById('selectedRegisterRole').value;
+            const educationLevel = formData.get('education') || event.target.querySelector('select').value;
+            
+            if (!selectedRole) {
+                alert('يرجى اختيار دورك (طالب)');
+                return;
+            }
+            
+            // Generate avatar based on name
+            const userAvatar = `https://picsum.photos/seed/${userName}/100/100.jpg`;
+            
+            // Save complete user data to localStorage
+            localStorage.setItem('userName', userName);
+            localStorage.setItem('userEmail', email);
+            localStorage.setItem('userRole', selectedRole);
+            localStorage.setItem('userAvatar', userAvatar);
+            localStorage.setItem('profileImage', userAvatar);
+            localStorage.setItem('educationLevel', educationLevel);
+            localStorage.setItem('isLoggedIn', 'true');
+            
+            // Set default values for other fields
+            localStorage.setItem('userPhone', '');
+            localStorage.setItem('lessonsPassword', 'lessons123');
+            localStorage.setItem('sessionsPassword', 'sessions456');
+            
+            // Simulate registration success
+            alert('تم إنشاء حسابك بنجاح! جاري تسجيل الدخول تلقائياً...');
+            
+            // Auto-login after registration
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1500);
+        }
+        
+        // Initialize
+        checkDarkMode();
+        
+        // Auto-select student role on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Auto-select student role for registration only
+            selectRegisterRole('student');
+        });
+    </script>
+</body>
+</html>

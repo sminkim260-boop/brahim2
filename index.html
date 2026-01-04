@@ -1,0 +1,2860 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة واد الرمان التعليمية</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 30%, #f093fb 50%, #ff6b6b 70%, #4c1d95 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            color: #0f172a;
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+            animation: shimmer 3s ease-in-out infinite;
+            z-index: -1;
+        }
+        
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, rgba(255, 255, 255, 0) 100%), 
+                        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, rgba(255, 255, 255, 0) 100%),
+                        radial-gradient(circle at 40% 40%, rgba(255, 119, 198, 0.2) 0%, rgba(255, 255, 255, 0) 100%),
+                        radial-gradient(circle at 60% 60%, rgba(255, 119, 198, 0.1) 0%, rgba(255, 255, 255, 0) 100%),
+                        radial-gradient(circle at 80% 80%, rgba(120, 119, 198, 0.3) 0%, rgba(255, 255, 255, 0) 100%);
+            animation: float 6s ease-in-out infinite;
+            z-index: -1;
+        }
+        
+        /* Enhanced Animations */
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+        
+        @keyframes shimmer {
+            0% {
+                background-position: -200% 0;
+            }
+            100% {
+                background-position: 200% 0;
+            }
+        }
+        
+        @keyframes spin-slow {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        @keyframes shimmer-effect {
+            0% {
+                background-position: -200% center;
+            }
+            100% {
+                background-position: 200% center;
+            }
+        }
+        
+        /* Mobile Responsive Enhancements */
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                z-index: 50;
+                transition: right 0.3s ease;
+            }
+            
+            .sidebar.open {
+                right: 0;
+            }
+            
+            .sidebar.collapsed {
+                margin-right: 0;
+                right: -100%;
+            }
+            
+            .main-content {
+                margin-right: 0;
+                padding: 1rem;
+            }
+            
+            .mobile-menu-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 40;
+                backdrop-filter: blur(2px);
+            }
+            
+            .mobile-menu-overlay.active {
+                display: block;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .desktop-menu-btn {
+                display: none;
+            }
+            
+            .grid-cols-1.md\:grid-cols-2.lg\:grid-cols-3 {
+                grid-template-columns: 1fr;
+            }
+            
+            .grid-cols-1.lg\:grid-cols-3 {
+                grid-template-columns: 1fr;
+            }
+            
+            .grid-cols-1.md\:grid-cols-2 {
+                grid-template-columns: 1fr;
+            }
+            
+            .enhanced-header {
+                padding: 0 1rem;
+            }
+            
+            .enhanced-header .space-x-reverse {
+                margin-left: 0.5rem;
+            }
+            
+            .profile-modal {
+                margin: 1rem;
+                max-width: calc(100vw - 2rem);
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .text-2xl {
+                font-size: 1.5rem;
+            }
+            
+            .text-xl {
+                font-size: 1.25rem;
+            }
+            
+            .text-lg {
+                font-size: 1.125rem;
+            }
+            
+            .p-6 {
+                padding: 1rem;
+            }
+            
+            .p-4 {
+                padding: 0.75rem;
+            }
+            
+            .px-6 {
+                padding-left: 0.75rem;
+                padding-right: 0.75rem;
+            }
+            
+            .py-3 {
+                padding-top: 0.75rem;
+                padding-bottom: 0.75rem;
+            }
+            
+            .enhanced-header {
+                padding: 0 0.5rem;
+            }
+            
+            .enhanced-header .space-x-reverse {
+                margin-left: 0.25rem;
+            }
+            
+            .profile-modal {
+                margin: 0.5rem;
+                max-width: calc(100vw - 1rem);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .text-2xl {
+                font-size: 1.25rem;
+            }
+            
+            .text-xl {
+                font-size: 1.125rem;
+            }
+            
+            .text-lg {
+                font-size: 1rem;
+            }
+            
+            .p-6 {
+                padding: 0.75rem;
+            }
+            
+            .px-6 {
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
+            }
+            
+            .py-3 {
+                padding-top: 0.5rem;
+                padding-bottom: 0.5rem;
+            }
+            
+            .enhanced-header {
+                padding: 0 0.25rem;
+            }
+            
+            .enhanced-header .space-x-reverse {
+                margin-left: 0.125rem;
+            }
+            
+            .profile-modal {
+                margin: 1rem;
+                max-width: calc(100vw - 2rem);
+            }
+        }
+        
+        .animate-slide-in {
+            animation: slideInRight 0.5s ease-out;
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        .animate-pulse-hover:hover {
+            animation: pulse 0.3s ease-in-out;
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        /* Enhanced Sidebar */
+        .sidebar {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+            box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .sidebar.collapsed {
+            margin-right: -256px;
+        }
+        
+        /* Mobile Sidebar Enhancements */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 280px;
+                right: -280px;
+                transform: translateX(0);
+            }
+            
+            .sidebar.active {
+                right: 0;
+                transform: translateX(0);
+            }
+            
+            .sidebar a {
+                padding: 1.5rem 0.75rem;
+                border-radius: 0.75rem;
+            }
+            
+            .sidebar a .flex-1 {
+                min-width: 0;
+            }
+            
+            .sidebar a .w-8 {
+                width: 2rem;
+                height: 2rem;
+            }
+            
+            .sidebar a .ml-3 {
+                margin-left: 0.75rem;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .sidebar {
+                width: 260px;
+                right: -260px;
+            }
+            
+            .sidebar.active {
+                right: 0;
+            }
+            
+            .sidebar a {
+                padding: 1.25rem 0.5rem;
+                border-radius: 0.625rem;
+            }
+            
+            .sidebar a .w-8 {
+                width: 1.75rem;
+                height: 1.75rem;
+            }
+            
+            .sidebar a .ml-3 {
+                margin-left: 0.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .sidebar {
+                width: 240px;
+                right: -240px;
+            }
+            
+            .sidebar.active {
+                right: 0;
+            }
+            
+            .sidebar a {
+                padding: 1rem 0.5rem;
+                border-radius: 0.5rem;
+                min-height: 3.5rem;
+            }
+            
+            .sidebar a .w-8 {
+                width: 1.5rem;
+                height: 1.5rem;
+            }
+            
+            .sidebar a .ml-3 {
+                margin-left: 0.5rem;
+            }
+            
+            .sidebar a .text-xs {
+                font-size: 0.625rem;
+            }
+            
+            .sidebar a .font-bold {
+                font-size: 0.875rem;
+            }
+        }
+        
+        .main-content {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        
+        .main-content.expanded {
+            margin-right: 0;
+        }
+        
+        /* Enhanced Cards */
+        .enhanced-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.85) 50%, rgba(255, 255, 255, 0.6) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 15px 35px rgba(31, 38, 135, 0.2), 0 0 20px 60px rgba(31, 38, 135, 0.3);
+            backdrop-filter: blur(20px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .enhanced-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: opacity 0.3s ease;
+        }
+        
+        .enhanced-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(31, 38, 135, 0.3), 0 0 30px 80px rgba(31, 38, 135, 0.4);
+        }
+        
+        .enhanced-card:hover::before {
+            opacity: 1;
+        }
+        
+        /* Enhanced Buttons */
+        .enhanced-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 20%, #f093fb 40%, #ff6b6b 60%, #4c1d95 100%);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4), 0 0 15px 35px rgba(102, 126, 234, 0.6);
+        }
+        
+        .enhanced-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .enhanced-btn:hover::before {
+            left: 100%;
+        }
+        
+        .enhanced-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4), 0 0 25px 45px rgba(102, 126, 234, 0.6);
+        }
+        
+        .enhanced-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            border-radius: 50%;
+            transform: scale(0) rotate(45deg);
+            transition: all 0.3s ease;
+        }
+        
+        .enhanced-btn:hover::after {
+            top: 0;
+            left: 0;
+            transform: scale(1) rotate(0deg);
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.2), transparent);
+            border-radius: 50%;
+        }
+        
+        /* Enhanced Header */
+        .enhanced-header {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        /* Enhanced Stats */
+        .stat-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s;
+        }
+        
+        .stat-card:hover::before {
+            top: -100%;
+            right: -100%;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(31, 38, 135, 0.25);
+        }
+        
+        /* Glassmorphism effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Dark Mode Styles */
+        body.dark {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            color: #f1f5f9;
+        }
+        body.dark .bg-white {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        }
+        body.dark .text-gray-900 {
+            color: #f1f5f9 !important;
+        }
+        body.dark .text-gray-600 {
+            color: #94a3b8 !important;
+        }
+        body.dark .text-gray-700 {
+            color: #e2e8f0 !important;
+        }
+        body.dark .text-gray-500 {
+            color: #64748b !important;
+        }
+        body.dark .border-gray-200 {
+            border-color: #334155 !important;
+        }
+        body.dark .border-gray-300 {
+            border-color: #334155 !important;
+        }
+        body.dark .bg-gray-50 {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%) !important;
+        }
+        body.dark .hover\:bg-gray-100:hover {
+            background: linear-gradient(135deg, #334155 0%, #475569 100%) !important;
+        }
+        body.dark .hover\:bg-gray-50:hover {
+            background: linear-gradient(135deg, #334155 0%, #475569 100%) !important;
+        }
+        body.dark input, body.dark textarea, body.dark select {
+            background: linear-gradient(135deg, #334155 0%, #475569 100%) !important;
+            color: #f1f5f9 !important;
+            border-color: #475569 !important;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                z-index: 40;
+                height: 100vh;
+                margin-right: -256px;
+            }
+            .sidebar.mobile-open {
+                margin-right: 0;
+            }
+            .main-content {
+                margin-right: 0;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .enhanced-card {
+                margin: 0.5rem;
+            }
+        }
+        
+        /* Enhanced Sidebar and Main Content Styling */
+        .sidebar {
+            background: linear-gradient(135deg, #fefce8 0%, #fef3c7 25%, #fef9c3 50%, #fef08a 75%, #fde047 100%);
+            backdrop-filter: blur(10px);
+            border-left: 1px solid rgba(253, 224, 71, 0.3);
+            box-shadow: -4px 0 20px rgba(253, 224, 71, 0.2);
+        }
+        
+        .sidebar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(229, 231, 235, 0.1), transparent);
+        }
+        
+        .main-content {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 25%, #ecfdf5 50%, #f0fdfa 75%, #f7fee7 100%);
+            min-height: calc(100vh - 4rem);
+            position: relative;
+        }
+        
+        .main-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 1px;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, rgba(229, 231, 235, 0.1), transparent);
+        }
+        
+        .text-vibrant-secondary {
+            color: #1e293b !important;
+            font-weight: 600;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+        }
+        
+        .text-vibrant-body {
+            color: #334155 !important;
+            font-weight: 500;
+            line-height: 1.7;
+        }
+        
+        .text-vibrant-muted {
+            color: #475569 !important;
+            font-weight: 400;
+        }
+        
+        .text-vibrant-accent {
+            color: #4f46e5 !important;
+            font-weight: 600;
+        }
+        
+        .sidebar-text-vibrant {
+            color: #1e293b !important;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+        
+        .sidebar-text-vibrant:hover {
+            color: #4f46e5 !important;
+            font-weight: 700;
+        }
+        
+        .stat-number-vibrant {
+            color: #0f172a !important;
+            font-weight: 800;
+            font-size: 2rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-label-vibrant {
+            color: #475569 !important;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+        
+        .card-title-vibrant {
+            color: #0f172a !important;
+            font-weight: 700;
+            font-size: 1.25rem;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .card-subtitle-vibrant {
+            color: #334155 !important;
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+        
+        .progress-label-vibrant {
+            color: #1e293b !important;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+        
+        .progress-value-vibrant {
+            color: #4f46e5 !important;
+            font-weight: 700;
+            font-size: 0.875rem;
+        }
+        
+        .achievement-title-vibrant {
+            color: #334155 !important;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+        
+        .live-indicator-vibrant {
+            color: #dc2626 !important;
+            font-weight: 700;
+            font-size: 0.75rem;
+            animation: pulse 2s infinite;
+        }
+        
+        .course-title-vibrant {
+            color: #0f172a !important;
+            font-weight: 600;
+        }
+        
+        .course-progress-vibrant {
+            color: #4f46e5 !important;
+            font-weight: 500;
+        }
+        
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            min-width: 2.75rem;
+            min-height: 2.75rem;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: flex;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .mobile-menu-btn {
+                padding: 0.5rem;
+                min-width: 2.5rem;
+                min-height: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .mobile-menu-btn {
+                padding: 0.375rem;
+                min-width: 2.25rem;
+                min-height: 2.25rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="enhanced-header shadow-lg border-b border-emerald-200 fixed top-0 left-0 right-0 z-30 animate-slide-in bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-600">
+        <div class="px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <button onclick="toggleSidebar()" class="mobile-menu-btn p-2 rounded-md text-white hover:text-emerald-100 hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all duration-200">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                    <div class="mr-4 flex items-center">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/almudir.firebasestorage.app/o/douroussi%2FLogo-douroussi-2024.svg?alt=media&token=74a1e52d-cd23-4709-9605-d6f627f9d05b" alt="واد الرمان" class="h-8 w-auto">
+                    </div>
+                </div>
+                <div class="flex items-center space-x-reverse space-x-2 sm:space-x-4">
+                    <button onclick="toggleDarkMode()" class="p-2 rounded-full text-white hover:text-emerald-100 hover:bg-white/20 transition-all duration-200">
+                        <i id="themeIcon" class="fas fa-moon text-lg sm:text-xl"></i>
+                    </button>
+                    <button onclick="logout()" class="p-2 rounded-full bg-gradient-to-r from-red-500 to-red-600 text-white hover:from-red-600 hover:to-red-700 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300" title="تسجيل الخروج">
+                        <i class="fas fa-sign-out-alt text-lg sm:text-xl"></i>
+                    </button>
+                    <button class="p-2 rounded-full text-white hover:text-emerald-100 hover:bg-white/20 relative transition-all duration-200">
+                        <svg class="h-5 w-5 sm:h-6 sm:w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+                        </svg>
+                        <span class="absolute top-0 left-0 block h-2 w-2 rounded-full bg-red-400"></span>
+                    </button>
+                    <div class="relative">
+                        <button class="flex items-center space-x-reverse space-x-2 sm:space-x-3 text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            <img id="header-user-avatar" class="h-7 w-7 sm:h-8 sm:w-8 rounded-full" src="https://picsum.photos/seed/user/40/40.jpg" alt="صورة المستخدم">
+                            <div class="hidden md:block text-right">
+                                <span id="header-user-name" class="font-medium text-white text-sm sm:text-base">المستخدم</span>
+                                <span id="header-user-role" class="block text-xs text-emerald-200">طالب</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" onclick="toggleSidebar()"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar fixed top-0 right-0 h-full w-64 shadow-xl z-20 pt-16 animate-slide-in bg-gradient-to-b from-white to-gray-50 border-l border-gray-200">
+        <!-- Sidebar Header -->
+        <div class="px-4 py-3 border-b border-gray-200">
+            <div class="flex items-center space-x-reverse space-x-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-lg flex items-center justify-center shadow-lg">
+                    <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="font-bold text-emerald-600">القائمة الرئيسية</h3>
+                    <p class="text-xs text-emerald-500">استكشف المحتوى التعليمي</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Navigation -->
+        <nav class="mt-6 px-3">
+            <!-- Main Section -->
+            <div class="mb-6">
+                <a href="#" onclick="switchTab('home')" class="group flex items-center px-3 py-2.5 rounded-xl bg-emerald-50 text-emerald-700 hover:bg-emerald-100 transition-all duration-200 shadow-sm">
+                    <div class="w-8 h-8 bg-emerald-600 rounded-lg flex items-center justify-center ml-3">
+                        <svg class="h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                        </svg>
+                    </div>
+                    <div class="flex-1">
+                        <div class="font-bold text-emerald-700">لوحة التحكم</div>
+                        <div class="text-xs text-emerald-600">الصفحة الرئيسية</div>
+                    </div>
+                </a>
+                <a href="#" onclick="switchTab('lessons')" class="group flex items-center px-3 py-2.5 rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+                    <div class="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center ml-3">
+                        <svg class="h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                    </div>
+                    <div class="flex-1">
+                        <div class="font-bold text-white">الدروس</div>
+                        <div class="text-xs text-blue-100">تصفح جميع الدروس</div>
+                    </div>
+                </a>
+                <a href="#" onclick="switchTab('live')" class="group flex items-center px-3 py-2.5 rounded-xl bg-gradient-to-r from-red-500 to-red-600 text-white hover:from-red-600 hover:to-red-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+                    <div class="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center ml-3">
+                        <svg class="h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <div class="flex-1">
+                        <div class="font-bold text-white">الدروس المباشرة</div>
+                        <div class="text-xs text-red-100">جلسات مباشرة</div>
+                    </div>
+                    <span class="bg-white text-red-600 text-xs px-2 py-1 rounded-full font-bold animate-pulse">مباشر</span>
+                </a>
+                <a href="#" onclick="switchTab('quiz')" class="group flex items-center px-3 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-white hover:from-amber-600 hover:to-amber-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+                    <div class="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center ml-3">
+                        <svg class="h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <div class="flex-1">
+                        <div class="font-bold text-white">تحدي الوقت</div>
+                        <div class="text-xs text-amber-100">اختبار معرفي سريع</div>
+                    </div>
+                </a>
+                <a href="#" onclick="switchTab('leaderboard')" class="group flex items-center px-3 py-2.5 rounded-xl bg-gradient-to-r from-purple-500 to-purple-600 text-white hover:from-purple-600 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+                    <div class="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center ml-3">
+                        <svg class="h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2m0 0V9a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                    </svg>
+                    </div>
+                    <div class="flex-1">
+                        <div class="font-bold text-white">لوحة التمييز</div>
+                        <div class="text-xs text-purple-100">تقدمك وإنجازاتك</div>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- Profile Settings Section -->
+            <div class="mb-6">
+                <h4 class="text-xs font-semibold text-indigo-600 uppercase tracking-wider mb-3 px-3 bg-indigo-50 py-2 rounded-lg border border-indigo-200">إعدادات وحساب</h4>
+                
+                <a href="#" onclick="showProfileSettings()" class="group flex items-center px-3 py-2.5 rounded-xl bg-gradient-to-r from-indigo-500 to-indigo-600 text-white hover:from-indigo-600 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+                    <div class="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center ml-3">
+                        <svg class="h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                        </svg>
+                    </div>
+                    <div class="flex-1">
+                        <div class="font-bold text-white">الملف الشخصي</div>
+                        <div class="text-xs text-indigo-100">معلومات حسابك</div>
+                    </div>
+                </a>
+            </div>
+        </nav>
+        
+        <!-- Sidebar Footer -->
+        <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200 bg-gradient-to-t from-gray-50 to-transparent">
+            <div class="text-center">
+                <div class="text-xs text-emerald-600 font-semibold mb-2">واد الرمان التعليمية</div>
+                <div class="text-xs text-red-600 font-bold">المطور: شاوشي ابراهيم</div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content mr-64 p-6">
+        <!-- Welcome Section -->
+        <div class="mb-8 animate-fade-in-up">
+            <!-- Home Tab -->
+            <section id="tab-home" class="tab-content active">
+                <div class="relative rounded-[1rem] md:rounded-[1.5rem] overflow-hidden bg-emerald-950 p-4 md:p-6 lg:p-8 text-white shadow-xl">
+                    <div class="relative z-10 w-full">
+                        <h3 class="text-xl md:text-2xl lg:text-3xl font-black mb-3 md:mb-4 leading-[1.2] quran-text">نور العلم <br><span class="text-amber-500">يهدي السبيل</span></h3>
+                        <p class="text-xs md:text-sm text-emerald-100/70 mb-4 md:mb-6 leading-relaxed">مرحبًا بك في بوابة واد الرمان التعليمية الشاملة.</p>
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <button onclick="switchTab('lessons')" class="w-full sm:w-auto px-6 py-2 bg-emerald-600 text-white font-black rounded-xl hover:bg-emerald-500 transition-all shadow-lg">تصفح الدروس</button>
+                            <button onclick="switchTab('live')" class="w-full sm:w-auto px-6 py-2 bg-blue-600 text-white font-black rounded-xl hover:bg-blue-500 transition-all shadow-lg">الدروس المباشرة</button>
+                            <button onclick="switchTab('quiz')" class="w-full sm:w-auto px-6 py-2 bg-amber-500 text-emerald-950 font-black rounded-xl hover:bg-amber-400 transition-all shadow-lg">تحدي الوقت</button>
+                            <button onclick="switchTab('leaderboard')" class="w-full sm:w-auto px-6 py-2 bg-purple-600 text-white font-black rounded-xl hover:bg-purple-500 transition-all shadow-lg">لوحة التمييز</button>
+                        </div>
+                    </div>
+                    <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none islamic-pattern"></div>
+                </div>
+            </section>
+        </div>
+
+        
+        <!-- Lessons Tab -->
+        <section id="tab-lessons" class="tab-content hidden">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl md:text-4xl font-black text-red-900 mb-4">الدروس التعليمية</h2>
+                    <p class="text-lg text-blue-600">استكشف مجموعتنا الواسعة من الدروس التعليمية لجميع المستويات</p>
+                </div>
+                
+                <!-- Filter Section -->
+                <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-blue-700 mb-2">المستوى</label>
+                            <select class="w-full px-3 py-2 bg-white border border-red-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">
+                                <option>جميع المستويات</option>
+                                <option>ابتدائي</option>
+                                <option>متوسط</option>
+                                <option>ثانوي</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">المادة</label>
+                            <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                                <option>جميع المواد</option>
+                                <option>اللغة العربية</option>
+                                <option>الرياضيات</option>
+                                <option>العلوم الإسلامية</option>
+                                <option>التاريخ والجغرافيا</option>
+                                <option>اللغة الإنجليزية</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">المدة</label>
+                            <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                                <option>جميع المدد</option>
+                                <option>أقل من 10 دروس</option>
+                                <option>10-15 درس</option>
+                                <option>أكثر من 15 درس</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">البحث</label>
+                            <input type="text" placeholder="ابحث عن درس..." class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                        </div>
+                    </div>
+                    <button class="mt-4 bg-emerald-600 text-white px-6 py-2 rounded-lg hover:bg-emerald-700 transition-colors">تطبيق الفلتر</button>
+                </div>
+
+                <!-- المستوى الابتدائي -->
+                <div class="mb-12">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-emerald-500 rounded-xl flex items-center justify-center ml-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800">المستوى الابتدائي</h3>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- اللغة العربية -->
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                            <div class="relative">
+                                <img src="https://picsum.photos/seed/arabic-elementary/400/250.jpg" alt="اللغة العربية" class="w-full h-48 object-cover">
+                                <div class="absolute top-3 right-3 bg-emerald-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">ابتدائي</div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-3 text-gray-800">اللغة العربية</h3>
+                                <p class="text-gray-600 text-sm mb-4 leading-relaxed">كل ما يخص اللغة العربية السنة الرابعة ابتدائي الفصل الاول برنامج الدروس مع الوضعيات المقررة</p>
+                                <div class="flex justify-between items-center mb-4">
+                                    <span class="text-sm text-gray-500 font-medium">20 درس</span>
+                                    <span class="text-sm text-emerald-600 font-bold">مجاني</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3 mb-4">
+                                    <div class="bg-emerald-500 h-3 rounded-full transition-all duration-500" style="width: 60%"></div>
+                                </div>
+                                <button onclick="window.location.href='lesson-view.html'" class="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 text-white py-3 rounded-xl hover:from-emerald-600 hover:to-emerald-700 transition-all duration-300 font-bold shadow-lg">ابدأ الآن</button>
+                            </div>
+                        </div>
+                        
+                        <!-- الرياضيات -->
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                            <div class="relative">
+                                <img src="https://picsum.photos/seed/math-elementary/400/250.jpg" alt="الرياضيات" class="w-full h-48 object-cover">
+                                <div class="absolute top-3 right-3 bg-emerald-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">ابتدائي</div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-3 text-gray-800">الرياضيات</h3>
+                                <p class="text-gray-600 text-sm mb-4 leading-relaxed">الأعداد والعمليات الحسابية والهندسة البسيطة</p>
+                                <div class="flex justify-between items-center mb-4">
+                                    <span class="text-sm text-gray-500 font-medium">18 درس</span>
+                                    <span class="text-sm text-emerald-600 font-bold">مجاني</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3 mb-4">
+                                    <div class="bg-emerald-500 h-3 rounded-full transition-all duration-500" style="width: 45%"></div>
+                                </div>
+                                <button onclick="window.location.href='lesson-view.html'" class="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 text-white py-3 rounded-xl hover:from-emerald-600 hover:to-emerald-700 transition-all duration-300 font-bold shadow-lg">ابدأ الآن</button>
+                            </div>
+                        </div>
+                        
+                        <!-- العلوم الإسلامية -->
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                            <div class="relative">
+                                <img src="https://picsum.photos/seed/islamic-elementary/400/250.jpg" alt="العلوم الإسلامية" class="w-full h-48 object-cover">
+                                <div class="absolute top-3 right-3 bg-emerald-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">ابتدائي</div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-3 text-gray-800">العلوم الإسلامية</h3>
+                                <p class="text-gray-600 text-sm mb-4 leading-relaxed">القرآن الكريم والحديث النبوي والعبادات</p>
+                                <div class="flex justify-between items-center mb-4">
+                                    <span class="text-sm text-gray-500 font-medium">15 درس</span>
+                                    <span class="text-sm text-emerald-600 font-bold">مجاني</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3 mb-4">
+                                    <div class="bg-emerald-500 h-3 rounded-full transition-all duration-500" style="width: 70%"></div>
+                                </div>
+                                <button onclick="window.location.href='lesson-view.html'" class="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 text-white py-3 rounded-xl hover:from-emerald-600 hover:to-emerald-700 transition-all duration-300 font-bold shadow-lg">ابدأ الآن</button>
+                            </div>
+                        </div>
+                        
+                        <!-- التاريخ والجغرافيا -->
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                            <div class="relative">
+                                <img src="https://picsum.photos/seed/history-elementary/400/250.jpg" alt="التاريخ والجغرافيا" class="w-full h-48 object-cover">
+                                <div class="absolute top-3 right-3 bg-emerald-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">ابتدائي</div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-3 text-gray-800">التاريخ والجغرافيا</h3>
+                                <p class="text-gray-600 text-sm mb-4 leading-relaxed">تاريخ المغرب والجغرافيا الأساسية</p>
+                                <div class="flex justify-between items-center mb-4">
+                                    <span class="text-sm text-gray-500 font-medium">12 درس</span>
+                                    <span class="text-sm text-emerald-600 font-bold">مجاني</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3 mb-4">
+                                    <div class="bg-emerald-500 h-3 rounded-full transition-all duration-500" style="width: 30%"></div>
+                                </div>
+                                <button onclick="window.location.href='lesson-view.html'" class="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 text-white py-3 rounded-xl hover:from-emerald-600 hover:to-emerald-700 transition-all duration-300 font-bold shadow-lg">ابدأ الآن</button>
+                            </div>
+                        </div>
+                        
+                        <!-- اللغة الإنجليزية -->
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                            <div class="relative">
+                                <img src="https://picsum.photos/seed/english-elementary/400/250.jpg" alt="اللغة الإنجليزية" class="w-full h-48 object-cover">
+                                <div class="absolute top-3 right-3 bg-emerald-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">ابتدائي</div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-3 text-gray-800">اللغة الإنجليزية</h3>
+                                <p class="text-gray-600 text-sm mb-4 leading-relaxed">أساسيات اللغة الإنجليزية والمفردات الأولى</p>
+                                <div class="flex justify-between items-center mb-4">
+                                    <span class="text-sm text-gray-500 font-medium">16 درس</span>
+                                    <span class="text-sm text-emerald-600 font-bold">مجاني</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3 mb-4">
+                                    <div class="bg-emerald-500 h-3 rounded-full transition-all duration-500" style="width: 25%"></div>
+                                </div>
+                                <button onclick="window.location.href='lesson-view.html'" class="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 text-white py-3 rounded-xl hover:from-emerald-600 hover:to-emerald-700 transition-all duration-300 font-bold shadow-lg">ابدأ الآن</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- المستوى المتوسط -->
+                <div class="mb-12">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center ml-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800">المستوى المتوسط</h3>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- اللغة العربية -->
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                            <div class="relative">
+                                <img src="https://picsum.photos/seed/arabic-middle/400/250.jpg" alt="اللغة العربية" class="w-full h-48 object-cover">
+                                <div class="absolute top-3 right-3 bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">متوسط</div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-3 text-gray-800">اللغة العربية</h3>
+                                <p class="text-gray-600 text-sm mb-4 leading-relaxed">النحو المتقدم والبلاغة والأدب</p>
+                                <div class="flex justify-between items-center mb-4">
+                                    <span class="text-sm text-gray-500 font-medium">25 درس</span>
+                                    <span class="text-sm text-blue-600 font-bold">مجاني</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3 mb-4">
+                                    <div class="bg-blue-500 h-3 rounded-full transition-all duration-500" style="width: 40%"></div>
+                                </div>
+                                <button class="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 rounded-xl hover:from-blue-600 hover:to-blue-700 transition-all duration-300 font-bold shadow-lg">ابدأ الآن</button>
+                            </div>
+                        </div>
+                        
+                        <!-- الرياضيات -->
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                            <div class="relative">
+                                <img src="https://picsum.photos/seed/math-middle/400/250.jpg" alt="الرياضيات" class="w-full h-48 object-cover">
+                                <div class="absolute top-3 right-3 bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">متوسط</div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-3 text-gray-800">الرياضيات</h3>
+                                <p class="text-gray-600 text-sm mb-4 leading-relaxed">الجبر والهندسة والإحصاء</p>
+                                <div class="flex justify-between items-center mb-4">
+                                    <span class="text-sm text-gray-500 font-medium">22 درس</span>
+                                    <span class="text-sm text-blue-600 font-bold">مجاني</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3 mb-4">
+                                    <div class="bg-blue-500 h-3 rounded-full transition-all duration-500" style="width: 35%"></div>
+                                </div>
+                                <button class="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 rounded-xl hover:from-blue-600 hover:to-blue-700 transition-all duration-300 font-bold shadow-lg">ابدأ الآن</button>
+                            </div>
+                        </div>
+                        
+                        <!-- العلوم الإسلامية -->
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                            <div class="relative">
+                                <img src="https://picsum.photos/seed/islamic-middle/400/250.jpg" alt="العلوم الإسلامية" class="w-full h-48 object-cover">
+                                <div class="absolute top-3 right-3 bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">متوسط</div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-3 text-gray-800">العلوم الإسلامية</h3>
+                                <p class="text-gray-600 text-sm mb-4 leading-relaxed">الفقه والعقيدة والسيرة النبوية</p>
+                                <div class="flex justify-between items-center mb-4">
+                                    <span class="text-sm text-gray-500 font-medium">20 درس</span>
+                                    <span class="text-sm text-blue-600 font-bold">مجاني</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3 mb-4">
+                                    <div class="bg-blue-500 h-3 rounded-full transition-all duration-500" style="width: 55%"></div>
+                                </div>
+                                <button class="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 rounded-xl hover:from-blue-600 hover:to-blue-700 transition-all duration-300 font-bold shadow-lg">ابدأ الآن</button>
+                            </div>
+                        </div>
+                        
+                        <!-- التاريخ والجغرافيا -->
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                            <div class="relative">
+                                <img src="https://picsum.photos/seed/history-middle/400/250.jpg" alt="التاريخ والجغرافيا" class="w-full h-48 object-cover">
+                                <div class="absolute top-3 right-3 bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">متوسط</div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-3 text-gray-800">التاريخ والجغرافيا</h3>
+                                <p class="text-gray-600 text-sm mb-4 leading-relaxed">تاريخ العالم والجغرافيا المتقدمة</p>
+                                <div class="flex justify-between items-center mb-4">
+                                    <span class="text-sm text-gray-500 font-medium">18 درس</span>
+                                    <span class="text-sm text-blue-600 font-bold">مجاني</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3 mb-4">
+                                    <div class="bg-blue-500 h-3 rounded-full transition-all duration-500" style="width: 40%"></div>
+                                </div>
+                                <button class="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 rounded-xl hover:from-blue-600 hover:to-blue-700 transition-all duration-300 font-bold shadow-lg">ابدأ الآن</button>
+                            </div>
+                        </div>
+                        
+                        <!-- اللغة الإنجليزية -->
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                            <div class="relative">
+                                <img src="https://picsum.photos/seed/english-middle/400/250.jpg" alt="اللغة الإنجليزية" class="w-full h-48 object-cover">
+                                <div class="absolute top-3 right-3 bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">متوسط</div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-3 text-gray-800">اللغة الإنجليزية</h3>
+                                <p class="text-gray-600 text-sm mb-4 leading-relaxed">قواعد اللغة والمحادثة والكتابة</p>
+                                <div class="flex justify-between items-center mb-4">
+                                    <span class="text-sm text-gray-500 font-medium">24 درس</span>
+                                    <span class="text-sm text-blue-600 font-bold">مجاني</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3 mb-4">
+                                    <div class="bg-blue-500 h-3 rounded-full transition-all duration-500" style="width: 30%"></div>
+                                </div>
+                                <button class="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 rounded-xl hover:from-blue-600 hover:to-blue-700 transition-all duration-300 font-bold shadow-lg">ابدأ الآن</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- المستوى الثانوي -->
+                <div class="mb-12">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-purple-500 rounded-xl flex items-center justify-center ml-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800">المستوى الثانوي</h3>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- اللغة العربية -->
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                            <div class="relative">
+                                <img src="https://picsum.photos/seed/arabic-secondary/400/250.jpg" alt="اللغة العربية" class="w-full h-48 object-cover">
+                                <div class="absolute top-3 right-3 bg-purple-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">ثانوي</div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-3 text-gray-800">اللغة العربية</h3>
+                                <p class="text-gray-600 text-sm mb-4 leading-relaxed">الأدب والنقد والبلاغة المتقدمة</p>
+                                <div class="flex justify-between items-center mb-4">
+                                    <span class="text-sm text-gray-500 font-medium">30 درس</span>
+                                    <span class="text-sm text-purple-600 font-bold">مجاني</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3 mb-4">
+                                    <div class="bg-purple-500 h-3 rounded-full transition-all duration-500" style="width: 20%"></div>
+                                </div>
+                                <button class="w-full bg-gradient-to-r from-purple-500 to-purple-600 text-white py-3 rounded-xl hover:from-purple-600 hover:to-purple-700 transition-all duration-300 font-bold shadow-lg">ابدأ الآن</button>
+                            </div>
+                        </div>
+                        
+                        <!-- الرياضيات -->
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                            <div class="relative">
+                                <img src="https://picsum.photos/seed/math-secondary/400/250.jpg" alt="الرياضيات" class="w-full h-48 object-cover">
+                                <div class="absolute top-3 right-3 bg-purple-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">ثانوي</div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-3 text-gray-800">الرياضيات</h3>
+                                <p class="text-gray-600 text-sm mb-4 leading-relaxed">حساب التفاضل والتكامل والرياضيات المتقدمة</p>
+                                <div class="flex justify-between items-center mb-4">
+                                    <span class="text-sm text-gray-500 font-medium">28 درس</span>
+                                    <span class="text-sm text-purple-600 font-bold">مجاني</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3 mb-4">
+                                    <div class="bg-purple-500 h-3 rounded-full transition-all duration-500" style="width: 15%"></div>
+                                </div>
+                                <button class="w-full bg-gradient-to-r from-purple-500 to-purple-600 text-white py-3 rounded-xl hover:from-purple-600 hover:to-purple-700 transition-all duration-300 font-bold shadow-lg">ابدأ الآن</button>
+                            </div>
+                        </div>
+                        
+                        <!-- العلوم الإسلامية -->
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                            <div class="relative">
+                                <img src="https://picsum.photos/seed/islamic-secondary/400/250.jpg" alt="العلوم الإسلامية" class="w-full h-48 object-cover">
+                                <div class="absolute top-3 right-3 bg-purple-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">ثانوي</div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-3 text-gray-800">العلوم الإسلامية</h3>
+                                <p class="text-gray-600 text-sm mb-4 leading-relaxed">الفقه المقارن والثقافة الإسلامية</p>
+                                <div class="flex justify-between items-center mb-4">
+                                    <span class="text-sm text-gray-500 font-medium">25 درس</span>
+                                    <span class="text-sm text-purple-600 font-bold">مجاني</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3 mb-4">
+                                    <div class="bg-purple-500 h-3 rounded-full transition-all duration-500" style="width: 35%"></div>
+                                </div>
+                                <button class="w-full bg-gradient-to-r from-purple-500 to-purple-600 text-white py-3 rounded-xl hover:from-purple-600 hover:to-purple-700 transition-all duration-300 font-bold shadow-lg">ابدأ الآن</button>
+                            </div>
+                        </div>
+                        
+                        <!-- التاريخ والجغرافيا -->
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                            <div class="relative">
+                                <img src="https://picsum.photos/seed/history-secondary/400/250.jpg" alt="التاريخ والجغرافيا" class="w-full h-48 object-cover">
+                                <div class="absolute top-3 right-3 bg-purple-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">ثانوي</div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-3 text-gray-800">التاريخ والجغرافيا</h3>
+                                <p class="text-gray-600 text-sm mb-4 leading-relaxed">التاريخ الحديث والجغرافيا الاقتصادية</p>
+                                <div class="flex justify-between items-center mb-4">
+                                    <span class="text-sm text-gray-500 font-medium">22 درس</span>
+                                    <span class="text-sm text-purple-600 font-bold">مجاني</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3 mb-4">
+                                    <div class="bg-purple-500 h-3 rounded-full transition-all duration-500" style="width: 25%"></div>
+                                </div>
+                                <button class="w-full bg-gradient-to-r from-purple-500 to-purple-600 text-white py-3 rounded-xl hover:from-purple-600 hover:to-purple-700 transition-all duration-300 font-bold shadow-lg">ابدأ الآن</button>
+                            </div>
+                        </div>
+                        
+                        <!-- اللغة الإنجليزية -->
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                            <div class="relative">
+                                <img src="https://picsum.photos/seed/english-secondary/400/250.jpg" alt="اللغة الإنجليزية" class="w-full h-48 object-cover">
+                                <div class="absolute top-3 right-3 bg-purple-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">ثانوي</div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-3 text-gray-800">اللغة الإنجليزية</h3>
+                                <p class="text-gray-600 text-sm mb-4 leading-relaxed">الأدب الإنجليزي والمهارات المتقدمة</p>
+                                <div class="flex justify-between items-center mb-4">
+                                    <span class="text-sm text-gray-500 font-medium">26 درس</span>
+                                    <span class="text-sm text-purple-600 font-bold">مجاني</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3 mb-4">
+                                    <div class="bg-purple-500 h-3 rounded-full transition-all duration-500" style="width: 18%"></div>
+                                </div>
+                                <button class="w-full bg-gradient-to-r from-purple-500 to-purple-600 text-white py-3 rounded-xl hover:from-purple-600 hover:to-purple-700 transition-all duration-300 font-bold shadow-lg">ابدأ الآن</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Quiz Tab -->
+        <section id="tab-quiz" class="tab-content hidden">
+            <!-- Quiz Section -->
+            <div id="quiz-intro" class="max-w-3xl mx-auto text-center space-y-6 md:space-y-8 p-4 sm:p-6 md:p-8 lg:p-12 glass-effect rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[2.5rem] lg:rounded-[3.5rem] border-b-4 sm:border-b-6 md:border-b-8 border-amber-500 shadow-2xl mb-8">
+                <div class="relative w-16 h-16 md:w-24 md:h-24 mx-auto">
+    <div class="absolute inset-0 bg-gradient-to-r from-amber-400 to-orange-500 rounded-2xl md:rounded-3xl animate-pulse opacity-30"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-amber-500 to-orange-600 rounded-2xl md:rounded-3xl animate-ping opacity-20"></div>
+    <div class="relative w-full h-full bg-gradient-to-br from-amber-500/20 to-orange-500/30 text-amber-500 rounded-2xl md:rounded-3xl flex items-center justify-center animate-bounce shadow-lg shadow-amber-500/50 border-2 border-amber-500/30">
+        <svg class="w-8 h-8 md:w-12 md:h-12 animate-spin-slow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        <div class="absolute inset-0 rounded-2xl md:rounded-3xl bg-gradient-to-tr from-transparent via-amber-500/20 to-transparent animate-shimmer"></div>
+    </div>
+</div>
+                <h3 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black quran-text text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-600 to-red-600 animate-pulse">سباق العلم والمعرفة</h3>
+                <p class="text-base sm:text-lg md:text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 animate-pulse">اختبر معلوماتك في تحدٍ زمني ممتع!</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                    <div class="bg-amber-50 p-4 rounded-xl border-2 border-amber-200">
+                        <div class="text-2xl md:text-3xl font-black text-amber-600">5</div>
+                        <div class="text-sm text-gray-600">دقائق</div>
+                    </div>
+                    <div class="bg-amber-50 p-4 rounded-xl border-2 border-amber-200">
+                        <div class="text-2xl md:text-3xl font-black text-amber-600">50</div>
+                        <div class="text-sm text-gray-600">سؤال</div>
+                    </div>
+                    <!-- Points per Question -->
+                    <div class="bg-amber-50 p-4 rounded-xl border-2 border-amber-200">
+                        <div class="text-2xl md:text-3xl font-black text-amber-600">10</div>
+                        <div class="text-sm text-gray-600">نقطة للإجابة الصحيحة</div>
+                    </div>
+                </div>
+                <button onclick="startQuiz()" class="px-6 sm:px-8 py-3 sm:py-4 bg-amber-500 text-white rounded-xl font-black hover:bg-amber-600 transition-all transform hover:scale-105 shadow-lg text-base sm:text-lg">ابدأ التحدي</button>
+            </div>
+            <div id="quiz-container" class="hidden">
+                <!-- Quiz Question Display -->
+                <div class="max-w-4xl mx-auto px-4 sm:px-6">
+                    <!-- Question Header -->
+                    <div class="bg-white rounded-2xl shadow-xl p-4 sm:p-6 mb-6 border-2 border-amber-200">
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
+                            <div class="flex flex-wrap items-center gap-2 sm:gap-4">
+                                <span class="px-2 sm:px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-xs sm:text-sm font-bold" id="q-category">دينية</span>
+                                <span class="text-gray-500 text-xs sm:text-sm">السؤال رقم</span>
+                                <span class="text-amber-600 font-bold text-lg sm:text-xl" id="current-q-num">1</span>
+                                <span class="text-gray-500 text-xs sm:text-sm">من 50</span>
+                            </div>
+                            <div class="flex flex-wrap items-center gap-2 sm:gap-4">
+                                <div class="flex items-center gap-2">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                    <span class="text-amber-600 font-bold text-lg sm:text-xl" id="timer-display">5:00</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                    <span class="text-emerald-600 font-bold text-lg sm:text-xl" id="score-display">0</span>
+                                </div>
+                                <button onclick="stopQuiz()" class="px-2 py-1.5 sm:px-3 bg-red-500 text-white rounded-lg font-bold hover:bg-red-600 transition-all transform hover:scale-105 shadow-lg flex items-center gap-1 text-xs sm:text-sm">
+                                    <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 10a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z"></path>
+                                    </svg>
+                                    <span class="hidden sm:inline">توقيف التحدي</span>
+                                    <span class="sm:hidden">إيقاف</span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Question Text -->
+                        <div class="text-center mb-6 sm:mb-8">
+                            <h3 class="text-xl sm:text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 mb-4 animate-pulse" id="question-text">جاري التحميل...</h3>
+                        </div>
+                        
+                        <!-- Options Grid -->
+                        <div id="options-grid" class="grid grid-cols-1 gap-3 sm:gap-4">
+                            <!-- Options will be dynamically loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Leaderboard Tab -->
+        <section id="tab-leaderboard" class="tab-content hidden">
+            <div class="max-w-4xl mx-auto space-y-12">
+                <!-- Section Header -->
+                <div class="text-center space-y-4">
+                    <h3 class="text-3xl md:text-4xl font-black quran-text text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-purple-600">لوحة التمييز</h3>
+                    <p class="text-lg text-gray-600">أبطال العلم والمتفوقون في سباق المعرفة</p>
+                </div>
+
+                <!-- Winner Podium -->
+                <div class="flex items-end justify-center gap-4 md:gap-8 pt-10 px-4">
+                    <!-- المركز الثاني -->
+                    <div class="podium-item flex-1 flex flex-col items-center max-w-[140px] order-1">
+                        <div class="relative">
+                            <div class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-slate-100 overflow-hidden border-4 border-slate-300 shadow-lg">
+                                <img id="avatar-rank-2" src="https://picsum.photos/seed/user2/100/100.jpg" alt="المركز الثاني" class="w-full h-full object-cover">
+                            </div>
+                            <div class="absolute -top-2 -right-2 w-8 h-8 bg-slate-400 rounded-full flex items-center justify-center text-white font-black text-sm shadow-lg border-2 border-white">2</div>
+                        </div>
+                        <div class="bg-slate-400 w-full h-20 md:h-24 rounded-t-lg flex items-center justify-center shadow-lg">
+                            <div class="text-white text-center">
+                                <div id="name-rank-2" class="font-black text-sm md:text-base">أحمد محمد</div>
+                                <div id="points-rank-2" class="text-xs md:text-sm font-bold">440 نقطة</div>
+                                <div id="label-rank-2" class="text-xs opacity-90">نابغة العصر</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- المركز الأول -->
+                    <div class="podium-item flex-1 flex flex-col items-center max-w-[160px] order-2">
+                        <div class="relative">
+                            <div class="w-24 h-24 md:w-28 md:h-28 rounded-full bg-gradient-to-br from-amber-300 to-amber-500 overflow-hidden border-4 border-amber-400 shadow-xl animate-pulse">
+                                <img id="avatar-rank-1" src="https://picsum.photos/seed/user1/100/100.jpg" alt="البطل" class="w-full h-full object-cover">
+                            </div>
+                            <div class="absolute -top-2 -right-2 w-10 h-10 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center text-white font-black text-lg shadow-xl border-2 border-amber-200 animate-bounce">1</div>
+                            <div class="absolute -top-1 -left-1 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center shadow-lg">
+                                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="bg-gradient-to-br from-amber-400 to-amber-600 w-full h-28 md:h-32 rounded-t-lg flex items-center justify-center shadow-xl">
+                            <div class="text-white text-center">
+                                <div id="name-rank-1" class="font-black text-base md:text-lg">البطل</div>
+                                <div id="points-rank-1" class="text-sm md:text-base font-bold">500 نقطة</div>
+                                <div id="label-rank-1" class="text-xs md:text-sm opacity-90">بطل المنصة</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- المركز الثالث -->
+                    <div class="podium-item flex-1 flex flex-col items-center max-w-[140px] order-3">
+                        <div class="relative">
+                            <div class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-orange-100 overflow-hidden border-4 border-orange-300 shadow-lg">
+                                <img id="avatar-rank-3" src="https://picsum.photos/seed/user3/100/100.jpg" alt="المركز الثالث" class="w-full h-full object-cover">
+                            </div>
+                            <div class="absolute -top-2 -right-2 w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center text-white font-black text-sm shadow-lg border-2 border-white">3</div>
+                        </div>
+                        <div class="bg-orange-500 w-full h-16 md:h-20 rounded-t-lg flex items-center justify-center shadow-lg">
+                            <div class="text-white text-center">
+                                <div id="name-rank-3" class="font-black text-sm md:text-base">فاطمة علي</div>
+                                <div id="points-rank-3" class="text-xs md:text-sm font-bold">410 نقطة</div>
+                                <div id="label-rank-3" class="text-xs opacity-90">عبقرية</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Leaderboard List -->
+                <div class="glass-effect rounded-[2.5rem] overflow-hidden shadow-2xl border border-slate-200">
+                    <div class="p-6 bg-gradient-to-r from-amber-500/10 to-purple-500/10 border-b border-slate-200 flex justify-between items-center">
+                        <h4 class="font-black text-green-900 flex items-center gap-2">
+                            <span class="text-amber-500">🏆</span>
+                            قائمة فرسان العلم
+                        </h4>
+                        <div class="flex items-center gap-3">
+                            <span class="px-4 py-1.5 bg-emerald-500/10 rounded-full text-[10px] font-black text-emerald-600 uppercase tracking-widest">تحديث مباشر</span>
+                            <button onclick="simulateLiveUpdate()" class="px-3 py-1 bg-amber-500 text-white rounded-lg text-xs font-black hover:bg-amber-600 transition-colors">
+                                تحديث
+                            </button>
+                        </div>
+                    </div>
+                    <div id="leaderboard-list" class="divide-y divide-slate-200 max-h-96 overflow-y-auto"></div>
+                </div>
+                
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-gradient-to-br from-amber-50 to-amber-100 p-6 rounded-2xl border-2 border-amber-200">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 bg-amber-500 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                </svg>
+                            </div>
+                            <span class="text-amber-600 text-sm font-black">اليوم</span>
+                        </div>
+                        <div class="text-2xl font-black text-amber-700">156</div>
+                        <div class="text-sm text-amber-600">تحدي مكتمل</div>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-2xl border-2 border-purple-200">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 bg-purple-500 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                </svg>
+                            </div>
+                            <span class="text-purple-600 text-sm font-black">نشط</span>
+                        </div>
+                        <div class="text-2xl font-black text-purple-700">89</div>
+                        <div class="text-sm text-purple-600">متنافس</div>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-emerald-50 to-emerald-100 p-6 rounded-2xl border-2 border-emerald-200">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 bg-emerald-500 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <span class="text-emerald-600 text-sm font-black">أعلى</span>
+                        </div>
+                        <div class="text-2xl font-black text-emerald-700">470</div>
+                        <div class="text-sm text-emerald-600">نقطة</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Live Tab -->
+        <section id="tab-live" class="tab-content hidden">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl md:text-4xl font-black text-gray-900 mb-4">الدروس المباشرة</h2>
+                    <p class="text-lg text-gray-600">انضم إلينا في الجلسات التعليمية المباشرة</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Live Session Card 1 -->
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                        <div class="relative">
+                            <img src="https://picsum.photos/seed/live1/400/250.jpg" alt="جلسة مباشرة" class="w-full h-48 object-cover">
+                            <div class="absolute top-2 right-2 bg-red-600 text-white px-2 py-1 rounded text-sm font-bold animate-pulse">مباشر</div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-2">تفسير سورة البقرة - الجزء الأول</h3>
+                            <p class="text-gray-600 text-sm mb-3">مع الشيخ الدكتور أحمد محمد</p>
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-sm text-gray-500">الآن</span>
+                                <span class="text-sm text-red-600 font-bold">234 مشاهد</span>
+                            </div>
+                            <button class="w-full bg-red-600 text-white py-2 rounded hover:bg-red-700 transition-colors">انضم الآن</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Live Session Card 2 -->
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                        <div class="relative">
+                            <img src="https://picsum.photos/seed/live2/400/250.jpg" alt="جلسة مباشرة" class="w-full h-48 object-cover">
+                            <div class="absolute top-2 right-2 bg-amber-600 text-white px-2 py-1 rounded text-sm font-bold">قريباً</div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-2">أحكام الصلاة من كتاب المغني</h3>
+                            <p class="text-gray-600 text-sm mb-3">مع الشيخ عبدالله العمر</p>
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-sm text-gray-500">8:00 مساءً</span>
+                                <span class="text-sm text-amber-600 font-bold">يبدأ بعد 2 ساعة</span>
+                            </div>
+                            <button class="w-full bg-amber-600 text-white py-2 rounded hover:bg-amber-700 transition-colors">تذكير</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Profile Modal -->
+        <div id="profileModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+            <div class="bg-white rounded-lg shadow-xl max-w-md w-full mx-4 animate-fade-in-up profile-modal">
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-bold text-gray-900">الملف الشخصي</h2>
+                        <button onclick="closeProfileSettings()" class="text-gray-400 hover:text-gray-600">
+                            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+
+                <!-- Profile Image Section -->
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-3">صورة الملف الشخصي</label>
+                    <div class="flex items-center space-x-reverse space-x-4">
+                        <div class="relative">
+                            <img id="profileImagePreview" src="https://picsum.photos/seed/user/80/80.jpg" alt="صورة المستخدم" class="h-20 w-20 rounded-full object-cover">
+                            <button onclick="document.getElementById('imageUpload').click()" class="absolute bottom-0 left-0 bg-indigo-600 text-white p-2 rounded-full hover:bg-indigo-700 transition-colors">
+                                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h7.86a2 2 0 011.664.89l.812 1.22A2 2 0 0118 9v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="flex-1">
+                            <input type="file" id="imageUpload" accept="image/*" class="hidden" onchange="handleImageUpload(event)">
+                            <p class="text-sm text-gray-600 mb-2">اختر صورة جديدة أو استخدم رابط</p>
+                            <div class="flex space-x-reverse space-x-2">
+                                <button onclick="document.getElementById('imageUpload').click()" class="enhanced-btn px-3 py-1 text-white text-sm rounded">
+                                    <i class="fas fa-upload ml-1"></i>
+                                    رفع صورة
+                                </button>
+                                <button onclick="showUrlInput()" class="bg-gray-600 text-white px-3 py-1 text-sm rounded hover:bg-gray-700 transition-colors">
+                                    <i class="fas fa-link ml-1"></i>
+                                    رابط
+                                </button>
+                            </div>
+                            <div id="urlInputContainer" class="mt-2 hidden">
+                                <div class="flex space-x-reverse space-x-2">
+                                    <input type="url" id="imageUrl" placeholder="أدخل رابط الصورة" class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm">
+                                    <button onclick="loadImageFromUrl()" class="enhanced-btn px-3 py-1 text-white text-sm rounded">
+                                        تحميل
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Name Section -->
+                <div class="mb-6">
+                    <label for="userName" class="block text-sm font-medium text-gray-700 mb-2">الاسم الكامل</label>
+                    <input type="text" id="userName" placeholder="أدخل اسمك الكامل" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+
+                <!-- Email Section -->
+                <div class="mb-6">
+                    <label for="userEmail" class="block text-sm font-medium text-gray-700 mb-2">البريد الإلكتروني</label>
+                    <input type="email" id="userEmail" placeholder="أدخل بريدك الإلكتروني" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+
+                <!-- Phone Section -->
+                <div class="mb-6">
+                    <label for="userPhone" class="block text-sm font-medium text-gray-700 mb-2">رقم الهاتف</label>
+                    <input type="tel" id="userPhone" placeholder="أدخل رقم هاتفك" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+
+                <!-- Role Section -->
+                <div class="mb-6">
+                    <label for="userRole" class="block text-sm font-medium text-gray-700 mb-2">دور المستخدم</label>
+                    <select id="userRole" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                        <option value="student">طالب</option>
+                        <option value="teacher">معلم</option>
+                        <option value="supervisor">مشرف</option>
+                        <option value="admin">مدير النظام</option>
+                    </select>
+                </div>
+
+                <!-- Password for Lessons Section -->
+                <div class="mb-6">
+                    <label for="lessonsPassword" class="block text-sm font-medium text-gray-700 mb-2">كلمة الورات للدروس</label>
+                    <div class="relative">
+                        <input type="password" id="lessonsPassword" value="lessons123" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                        <button type="button" onclick="togglePasswordVisibility('lessonsPassword')" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                            <svg id="lessonsPasswordIcon" class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C2.458 12.626 3 12.826 3 13c0 1.174 1.542 2 2.826 2 .458.458.826 1 1.826 1 3-.374.374-.826-1-1.826-1H4c-1.174 0-2 .374-2 .826 0 .458-.374.826-1 1.826-1 3 .374.826 1 1.826 1z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Password for Live Sessions Section -->
+                <div class="mb-6">
+                    <label for="sessionsPassword" class="block text-sm font-medium text-gray-700 mb-2">كلمة الورات للجلسات المباشرة</label>
+                    <div class="relative">
+                        <input type="password" id="sessionsPassword" value="sessions456" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                        <button type="button" onclick="togglePasswordVisibility('sessionsPassword')" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                            <svg id="sessionsPasswordIcon" class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C2.458 12.626 3 12.826 3 13c0 1.174 1.542 2 2.826 2 .458.458.826 1 1.826 1 3-.374.374-.826-1-1.826-1H4c-1.174 0-2 .374-2 .826 0 .458-.374.826-1 1.826-1 3 .374.826 1 1.826 1z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex space-x-reverse space-x-3 pt-4 border-t border-gray-200">
+                    <button onclick="saveProfileSettings()" class="enhanced-btn px-4 py-2 text-white rounded-md font-medium flex-1">
+                        <i class="fas fa-save ml-2"></i>
+                        حفظ التغييرات
+                    </button>
+                    <button onclick="closeProfileSettings()" class="bg-gray-600 text-white px-4 py-2 rounded-md font-medium hover:bg-gray-700 transition-colors flex-1">
+                        <i class="fas fa-times ml-2"></i>
+                        إلغاء
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            const mainContent = document.querySelector('.main-content');
+            const overlay = document.querySelector('.mobile-menu-overlay');
+            
+            if (window.innerWidth < 768) {
+                sidebar.classList.toggle('active');
+                overlay.classList.toggle('active');
+            } else {
+                sidebar.classList.toggle('collapsed');
+                mainContent.classList.toggle('expanded');
+            }
+        }
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.querySelector('.mobile-menu-overlay');
+            
+            if (window.innerWidth >= 768) {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+            }
+        });
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark');
+            const themeIcon = document.getElementById('themeIcon');
+            if (document.body.classList.contains('dark')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        }
+
+        function logout() {
+            if (confirm('هل أنت متأكد من تسجيل الخروج؟')) {
+                // Clear all user data from localStorage
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('userName');
+                localStorage.removeItem('userEmail');
+                localStorage.removeItem('userPhone');
+                localStorage.removeItem('userRole');
+                localStorage.removeItem('userAvatar');
+                localStorage.removeItem('profileImage');
+                localStorage.removeItem('educationLevel');
+                localStorage.removeItem('lessonsPassword');
+                localStorage.removeItem('sessionsPassword');
+                
+                // Redirect to login page
+                window.location.href = 'login.html';
+            }
+        }
+
+        function checkMobile() {
+            const sidebar = document.querySelector('.sidebar');
+            const mainContent = document.querySelector('.main-content');
+            
+            if (window.innerWidth < 768) {
+                sidebar.classList.remove('collapsed');
+                mainContent.classList.remove('expanded');
+                mainContent.classList.remove('mr-64');
+                sidebar.classList.remove('mobile-open');
+            } else {
+                sidebar.classList.remove('mobile-open');
+                if (!sidebar.classList.contains('collapsed')) {
+                    mainContent.classList.add('mr-64');
+                }
+            }
+        }
+
+        // Check dark mode on load
+        function checkDarkMode() {
+            const darkMode = localStorage.getItem('darkMode');
+            const themeIcon = document.getElementById('themeIcon');
+            
+            if (darkMode === 'enabled') {
+                document.body.classList.add('dark');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            }
+        }
+
+        // Profile Settings Functions
+        function showProfileSettings() {
+            document.getElementById('profileModal').classList.remove('hidden');
+        }
+
+        function closeProfileSettings() {
+            document.getElementById('profileModal').classList.add('hidden');
+        }
+
+        function handleImageUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                // Check file size (5MB limit)
+                if (file.size > 5 * 1024 * 1024) {
+                    alert('حجم الملف يجب أن لا يتجاوز 5MB');
+                    return;
+                }
+                
+                // Check file type
+                if (!file.type.match('image/jpeg') && !file.type.match('image/jpg') && !file.type.match('image/png')) {
+                    alert('يجب أن يكون الملف بصيغة PNG أو JPG');
+                    return;
+                }
+                
+                // Read and display image
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('profileImagePreview').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function togglePasswordVisibility(fieldId) {
+            const passwordField = document.getElementById(fieldId);
+            const icon = document.getElementById(fieldId + 'Icon');
+            
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825l10.5 10.5M18 4l6 6m0 0v12a2 2 0 002 2h12a2 2 0 002 2z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C2.458 12.626 3 12.826 3 13c0 1.174 1.542 2 2.826 2 .458.458.826 1 1.826 1 3-.374.374-.826-1-1.826-1H4c-1.174 0-2 .374-2 .826 0 .458-.374.826-1 1.826-1 3 .374.826 1 1.826 1z"></path>';
+            } else {
+                passwordField.type = 'password';
+                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C2.458 12.626 3 12.826 3 13c0 1.174 1.542 2 2.826 2 .458.458.826 1 1.826 1 3-.374.374-.826-1-1.826-1H4c-1.174 0-2 .374-2 .826 0 .458-.374.826-1 1.826-1 3 .374.826 1 1.826 1z"></path>';
+            }
+        }
+
+        function saveProfileSettings() {
+            const userName = document.getElementById('userName').value.trim();
+            const userEmail = document.getElementById('userEmail').value.trim();
+            const userPhone = document.getElementById('userPhone').value.trim();
+            const lessonsPassword = document.getElementById('lessonsPassword').value.trim();
+            const sessionsPassword = document.getElementById('sessionsPassword').value.trim();
+            const profileImage = document.getElementById('profileImagePreview').src;
+            const userRole = document.getElementById('userRole').value;
+
+            // Validation
+            if (!userName) {
+                alert('يرجى إدخال الاسم الكامل');
+                return;
+            }
+
+            if (!userEmail) {
+                alert('يرجى إدخال البريد الإلكتروني');
+                return;
+            }
+
+            if (!lessonsPassword) {
+                alert('يرجى إدخال كلمة المرور للدروس');
+                return;
+            }
+
+            if (!sessionsPassword) {
+                alert('يرجى إدخال كلمة المرور للجلسات المباشرة');
+                return;
+            }
+
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(userEmail)) {
+                alert('يرجى إدخال بريد إلكتروني صحيح');
+                return;
+            }
+
+            // Save to localStorage (in real app, this would be sent to server)
+            localStorage.setItem('userName', userName);
+            localStorage.setItem('userEmail', userEmail);
+            localStorage.setItem('userPhone', userPhone);
+            localStorage.setItem('lessonsPassword', lessonsPassword);
+            localStorage.setItem('sessionsPassword', sessionsPassword);
+            localStorage.setItem('profileImage', profileImage);
+            localStorage.setItem('userAvatar', profileImage);
+            localStorage.setItem('userRole', userRole);
+
+            // Update header with new user info
+            updateHeaderUserInfo(userName, profileImage, userRole);
+
+            // Show success message
+            alert('تم حفظ التغييرات بنجاح!');
+            closeProfileSettings();
+        }
+
+        function updateHeaderUserInfo(userName, profileImage, userRole) {
+            // Update header user name
+            const headerUserName = document.getElementById('header-user-name');
+            if (headerUserName) {
+                headerUserName.textContent = userName;
+            }
+
+            // Update header user image
+            const headerUserImage = document.getElementById('header-user-avatar');
+            if (headerUserImage) {
+                headerUserImage.src = profileImage;
+            }
+
+            // Update header user role
+            const headerUserRole = document.getElementById('header-user-role');
+            if (headerUserRole) {
+                // Translate role to Arabic
+                const roleTranslations = {
+                    'admin': 'مدير النظام',
+                    'supervisor': 'مشرف',
+                    'teacher': 'معلم',
+                    'student': 'طالب'
+                };
+                headerUserRole.textContent = roleTranslations[userRole] || 'طالب';
+                
+                // Update role color
+                headerUserRole.className = 'block text-xs';
+                if (userRole === 'admin') {
+                    headerUserRole.className += ' text-red-200';
+                } else if (userRole === 'supervisor') {
+                    headerUserRole.className += ' text-amber-200';
+                } else if (userRole === 'teacher') {
+                    headerUserRole.className += ' text-blue-200';
+                } else {
+                    headerUserRole.className += ' text-emerald-200';
+                }
+            }
+        }
+
+        // Check login status and load user data
+        function checkLoginStatus() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            const userName = localStorage.getItem('userName');
+            const userRole = localStorage.getItem('userRole');
+            const userAvatar = localStorage.getItem('userAvatar');
+            
+            if (!isLoggedIn || !userName) {
+                // Redirect to login if not logged in
+                alert('يرجى تسجيل الدخول أولاً');
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            // Load profile data if logged in
+            loadProfileData();
+        }
+        
+        // Load saved profile data on page load
+        function loadProfileData() {
+            const savedName = localStorage.getItem('userName');
+            const savedEmail = localStorage.getItem('userEmail');
+            const savedPhone = localStorage.getItem('userPhone');
+            const savedLessonsPassword = localStorage.getItem('lessonsPassword');
+            const savedSessionsPassword = localStorage.getItem('sessionsPassword');
+            const savedImage = localStorage.getItem('profileImage');
+            const savedRole = localStorage.getItem('userRole');
+            
+            if (savedName) {
+                document.getElementById('userName').value = savedName;
+            }
+
+            if (savedEmail) {
+                document.getElementById('userEmail').value = savedEmail;
+            }
+
+            if (savedPhone) {
+                document.getElementById('userPhone').value = savedPhone;
+            }
+
+            if (savedLessonsPassword) {
+                document.getElementById('lessonsPassword').value = savedLessonsPassword;
+            }
+
+            if (savedSessionsPassword) {
+                document.getElementById('sessionsPassword').value = savedSessionsPassword;
+            }
+
+            if (savedRole) {
+                document.getElementById('userRole').value = savedRole;
+            }
+
+            if (savedImage) {
+                document.getElementById('profileImagePreview').src = savedImage;
+            }
+
+            // Update header with loaded user info
+            updateHeaderUserInfo(savedName, savedImage, savedRole);
+        }
+
+        function showUrlInput() {
+            const urlContainer = document.getElementById('urlInputContainer');
+            urlContainer.classList.toggle('hidden');
+        }
+
+        function loadImageFromUrl() {
+            const urlInput = document.getElementById('imageUrl');
+            const url = urlInput.value.trim();
+            
+            if (url) {
+                // Validate URL format
+                try {
+                    new URL(url);
+                    document.getElementById('profileImagePreview').src = url;
+                } catch (error) {
+                    alert('يرجى إدخال رابط صحيح');
+                }
+            } else {
+                alert('يرجى إدخال رابط الصورة');
+            }
+        }
+
+        // Quiz Functions
+        let currentQuestion = 0;
+        let score = 0;
+        let timer = null;
+        let timeLeft = 60;
+        let quizQuestions = [
+            // 10 أسئلة دينية
+            {
+                question: "ما هو أول ما خلق الله؟",
+                options: ["القلم", "العرش", "الماء", "النور"],
+                correct: 0,
+                category: "دينية"
+            },
+            {
+                question: "كم عدد أركان الإسلام؟",
+                options: ["3", "4", "5", "6"],
+                correct: 2,
+                category: "دينية"
+            },
+            {
+                question: "من هو أول الخلفاء الراشدين؟",
+                options: ["عمر بن الخطاب", "أبو بكر الصديق", "عثمان بن عفان", "علي بن أبي طالب"],
+                correct: 1,
+                category: "دينية"
+            },
+            {
+                question: "ما هي السورة التي تبدأ بـ \"اقرأ\"؟",
+                options: ["الفاتحة", "البقرة", "العلق", "الإخلاص"],
+                correct: 2,
+                category: "دينية"
+            },
+            {
+                question: "كم عدد الصلوات المفروضة في اليوم؟",
+                options: ["3", "4", "5", "6"],
+                correct: 2,
+                category: "دينية"
+            },
+            {
+                question: "ما هي أول آية نزلت من القرآن؟",
+                options: ["بسم الله الرحمن الرحيم", "اقرأ باسم ربك الذي خلق", "الحمد لله رب العالمين", "قل هو الله أحد"],
+                correct: 1,
+                category: "دينية"
+            },
+            {
+                question: "من هو النبي الذي يسمى \"خليل الرحمن\"؟",
+                options: ["موسى", "إبراهيم", "محمد", "عيسى"],
+                correct: 1,
+                category: "دينية"
+            },
+            {
+                question: "كم عدد السور في القرآن الكريم؟",
+                options: ["114", "113", "115", "112"],
+                correct: 0,
+                category: "دينية"
+            },
+            {
+                question: "ما هي الصلاة التي تقام في جوف الليل؟",
+                options: ["الفجر", "الظهر", "العشاء", "التهجد"],
+                correct: 3,
+                category: "دينية"
+            },
+            {
+                question: "من هو الصحابي الذي لقب بـ \"سيف الله المسلول\"؟",
+                options: ["أبو بكر الصديق", "عمر بن الخطاب", "خالد بن الوليد", "علي بن أبي طالب"],
+                correct: 2,
+                category: "دينية"
+            },
+            
+            // 10 أسئلة اللغة العربية
+            {
+                question: "ما هو المفعول به في جملة \"قرأ الطالبُ الدرسَ\"؟",
+                options: ["الطالب", "الدرس", "قرأ", "الجملة"],
+                correct: 1,
+                category: "اللغة العربية"
+            },
+            {
+                question: "ما هو جمع كلمة \"كتاب\"؟",
+                options: ["كتابات", "كتب", "كُتّاب", "مكتبة"],
+                correct: 1,
+                category: "اللغة العربية"
+            },
+            {
+                question: "ما هو نوع \"أحمد\" من حيث الإعراب؟",
+                options: ["مبتدأ", "خبر", "فعل", "حرف"],
+                correct: 0,
+                category: "اللغة العربية"
+            },
+            {
+                question: "ما هو المضارع من الفعل \"كتب\"؟",
+                options: ["كتب", "يكتب", "كاتب", "مكتوب"],
+                correct: 1,
+                category: "اللغة العربية"
+            },
+            {
+                question: "كم عدد أحرف الهجاء العربية؟",
+                options: ["26", "28", "29", "30"],
+                correct: 1,
+                category: "اللغة العربية"
+            },
+            {
+                question: "ما هو المصدر من الفعل \"علّم\"؟",
+                options: ["علم", "تعليم", "معلم", "معلوم"],
+                correct: 1,
+                category: "اللغة العربية"
+            },
+            {
+                question: "ما هو المثنى لكلمة \"رجل\"؟",
+                options: ["رجال", "رجولة", "رجلان", "رجليين"],
+                correct: 2,
+                category: "اللغة العربية"
+            },
+            {
+                question: "ما هو النفي في جملة \"ما زيدٌ قائماً\"؟",
+                options: ["ما", "زيد", "قائماً", "التنوين"],
+                correct: 0,
+                category: "اللغة العربية"
+            },
+            {
+                question: "ما هو نوع الجملة \"السماءُ صافيةٌ\"؟",
+                options: ["اسمية", "فعلية", "شرطية", "استفهامية"],
+                correct: 0,
+                category: "اللغة العربية"
+            },
+            {
+                question: "ما هو عطف النسق في جملة \"جاء محمدٌ وخالدٌ\"؟",
+                options: ["جاء", "محمد", "الواو", "خالد"],
+                correct: 2,
+                category: "اللغة العربية"
+            },
+            
+            // 10 أسئلة تاريخ وجغرافيا
+            {
+                question: "في أي عام هاجر النبي محمد صلى الله عليه وسلم إلى المدينة؟",
+                options: ["620م", "622م", "624م", "626م"],
+                correct: 1,
+                category: "تاريخ وجغرافيا"
+            },
+            {
+                question: "ما هي عاصمة فرنسا؟",
+                options: ["لندن", "برلين", "باريس", "روما"],
+                correct: 2,
+                category: "تاريخ وجغرافيا"
+            },
+            {
+                question: "كم عدد القارات في العالم؟",
+                options: ["5", "6", "7", "8"],
+                correct: 2,
+                category: "تاريخ وجغرافيا"
+            },
+            {
+                question: "في أي عام وقعت معركة بدر الكبرى؟",
+                options: ["622م", "624م", "626م", "628م"],
+                correct: 1,
+                category: "تاريخ وجغرافيا"
+            },
+            {
+                question: "ما هي أطول نهر في العالم؟",
+                options: ["النيل", "الأمازون", "الميسيسيبي", "اليانغتسي"],
+                correct: 1,
+                category: "تاريخ وجغرافيا"
+            },
+            {
+                question: "ما هي عاصمة اليابان؟",
+                options: ["سيول", "بكين", "طوكيو", "بانكوك"],
+                correct: 2,
+                category: "تاريخ وجغرافيا"
+            },
+            {
+                question: "كم استمرت الخلافة الراشدة؟",
+                options: ["20 عاماً", "30 عاماً", "40 عاماً", "50 عاماً"],
+                correct: 1,
+                category: "تاريخ وجغرافيا"
+            },
+            {
+                question: "ما هي أكبر دولة عربية من حيث المساحة؟",
+                options: ["مصر", "السعودية", "الجزائر", "السودان"],
+                correct: 2,
+                category: "تاريخ وجغرافيا"
+            },
+            {
+                question: "في أي عام فتحت القسطنطينية؟",
+                options: ["1453م", "1492م", "1517م", "1526م"],
+                correct: 0,
+                category: "تاريخ وجغرافيا"
+            },
+            {
+                question: "ما هي أصغر قارة في العالم؟",
+                options: ["أوروبا", "أستراليا", "أنتاركتيكا", "آسيا"],
+                correct: 2,
+                category: "تاريخ وجغرافيا"
+            },
+            
+            // 10 أسئلة الرياضيات
+            {
+                question: "ما هي نتيجة 5 × 8؟",
+                options: ["35", "40", "45", "50"],
+                correct: 1,
+                category: "الرياضيات"
+            },
+            {
+                question: "ما هو مربع العدد 7؟",
+                options: ["14", "21", "49", "56"],
+                correct: 2,
+                category: "الرياضيات"
+            },
+            {
+                question: "ما هو ناتج 144 ÷ 12؟",
+                options: ["10", "11", "12", "13"],
+                correct: 2,
+                category: "الرياضيات"
+            },
+            {
+                question: "ما هو مجموع زوايا المثلث؟",
+                options: ["90°", "180°", "270°", "360°"],
+                correct: 1,
+                category: "الرياضيات"
+            },
+            {
+                question: "ما هو العدد الزوجي التالي لعدد 15؟",
+                options: ["14", "16", "18", "20"],
+                correct: 1,
+                category: "الرياضيات"
+            },
+            {
+                question: "ما هي قيمة π (باي) التقريبية؟",
+                options: ["3.14", "3.41", "2.71", "1.61"],
+                correct: 0,
+                category: "الرياضيات"
+            },
+            {
+                question: "ما هو ناتج 2³ (2 للقوة 3)؟",
+                options: ["4", "6", "8", "9"],
+                correct: 2,
+                category: "الرياضيات"
+            },
+            {
+                question: "كم عدد أضلاع المثمن؟",
+                options: ["6", "7", "8", "9"],
+                correct: 2,
+                category: "الرياضيات"
+            },
+            {
+                question: "ما هو ناتج 25% من 200؟",
+                options: ["25", "50", "75", "100"],
+                correct: 1,
+                category: "الرياضيات"
+            },
+            {
+                question: "ما هو العدد الأولي التالي لعدد 17؟",
+                options: ["18", "19", "21", "23"],
+                correct: 1,
+                category: "الرياضيات"
+            },
+            
+            // 10 أسئلة ثقافة عامة
+            {
+                question: "كم عدد كواكب المجموعة الشمسية؟",
+                options: ["7", "8", "9", "10"],
+                correct: 1,
+                category: "ثقافة عامة"
+            },
+            {
+                question: "ما هو أكبر محيط في العالم؟",
+                options: ["المحيط الهادئ", "المحيط الأطلسي", "المحيط الهندي", "المحيط القطبي"],
+                correct: 0,
+                category: "ثقافة عامة"
+            },
+            {
+                question: "كم عدد عظام جسم الإنسان البالغ؟",
+                options: ["106", "206", "306", "406"],
+                correct: 1,
+                category: "ثقافة عامة"
+            },
+            {
+                question: "ما هي أسرع حيوان في العالم؟",
+                options: ["الأسد", "الفهد", "النمر", "الغزال"],
+                correct: 1,
+                category: "ثقافة عامة"
+            },
+            {
+                question: "كم عدد دول العالم تقريباً؟",
+                options: ["150", "195", "200", "250"],
+                correct: 1,
+                category: "ثقافة عامة"
+            },
+            {
+                question: "ما هو أطول نهر في آسيا؟",
+                options: ["النيل", "الفرات", "دجلة", "اليانغتسي"],
+                correct: 3,
+                category: "ثقافة عامة"
+            },
+            {
+                question: "كم عدد لغات الأمم المتحدة الرسمية؟",
+                options: ["4", "5", "6", "7"],
+                correct: 2,
+                category: "ثقافة عامة"
+            },
+            {
+                question: "ما هو أعلى جبل في العالم؟",
+                options: ["جبل أفرست", "جبل إيفرست", "جبل كليمنجارو", "جبل مونت بلان"],
+                correct: 1,
+                category: "ثقافة عامة"
+            },
+            {
+                question: "كم يبلغ طول يوم الأرض بالساعات؟",
+                options: ["12 ساعة", "24 ساعة", "36 ساعة", "48 ساعة"],
+                correct: 1,
+                category: "ثقافة عامة"
+            },
+            {
+                question: "ما هي أكبر صحراء في العالم؟",
+                options: ["صحراء الربع الخالي", "صحراء كلهاري", "صحراء الصحراء الكبرى", "صحراء غوبي"],
+                correct: 2,
+                category: "ثقافة عامة"
+            }
+        ];
+
+        function startQuiz() {
+            // Check if user is logged in
+            const userName = localStorage.getItem('userName');
+            if (!userName) {
+                // Show login prompt
+                if (confirm('يجب تسجيل الدخول قبل بدء التحدي. هل تريد الانتقال إلى صفحة تسجيل الدخول؟')) {
+                    window.location.href = 'login.html';
+                }
+                return;
+            }
+            
+            // Check if quiz elements exist
+            const quizIntro = document.getElementById('quiz-intro');
+            const quizContainer = document.getElementById('quiz-container');
+            const scoreDisplay = document.getElementById('score-display');
+            const timerDisplay = document.getElementById('timer-display');
+            
+            if (!quizIntro || !quizContainer || !scoreDisplay || !timerDisplay) {
+                console.error('Required quiz elements not found');
+                alert('حدث خطأ في تحميل التحدي. يرجى تحديث الصفحة.');
+                return;
+            }
+            
+            // Reset quiz state
+            currentQuestion = 0;
+            score = 0;
+            timeLeft = 300;
+            
+            // Clear any existing timer
+            clearInterval(timer);
+            
+            // Reset UI elements
+            scoreDisplay.textContent = '0';
+            timerDisplay.textContent = '5:00';
+            timerDisplay.className = 'text-amber-600 font-bold text-xl';
+            
+            // Show quiz container and hide intro
+            quizIntro.classList.add('hidden');
+            quizContainer.classList.remove('hidden');
+            
+            // Start the quiz
+            loadQuestion();
+            startTimer();
+        }
+
+        function loadQuestion() {
+            if (currentQuestion >= quizQuestions.length) {
+                endQuiz();
+                return;
+            }
+
+            const question = quizQuestions[currentQuestion];
+            document.getElementById('question-text').textContent = question.question;
+            document.getElementById('q-category').textContent = question.category;
+            document.getElementById('current-q-num').textContent = currentQuestion + 1;
+            
+            const optionsGrid = document.getElementById('options-grid');
+            optionsGrid.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.className = 'p-4 md:p-6 bg-white border-2 border-gray-200 rounded-xl hover:border-emerald-500 hover:bg-emerald-50 transition-all text-right font-bold text-gray-700 hover:text-emerald-700';
+                button.textContent = option;
+                button.onclick = () => selectAnswer(index);
+                optionsGrid.appendChild(button);
+            });
+        }
+
+        function selectAnswer(selectedIndex) {
+            const question = quizQuestions[currentQuestion];
+            const options = document.querySelectorAll('#options-grid button');
+            
+            options.forEach((option, index) => {
+                option.disabled = true;
+                if (index === question.correct) {
+                    option.className = 'p-4 md:p-6 bg-emerald-100 border-2 border-emerald-500 rounded-xl text-right font-bold text-emerald-700';
+                } else if (index === selectedIndex) {
+                    option.className = 'p-4 md:p-6 bg-red-100 border-2 border-red-500 rounded-xl text-right font-bold text-red-700';
+                }
+            });
+
+            if (selectedIndex === question.correct) {
+                score += 10;
+                document.getElementById('score-display').textContent = score;
+            }
+
+            setTimeout(() => {
+                currentQuestion++;
+                loadQuestion();
+            }, 1500);
+        }
+
+        function startTimer() {
+            clearInterval(timer);
+            timer = setInterval(() => {
+                timeLeft--;
+                document.getElementById('timer-display').textContent = timeLeft;
+                
+                if (timeLeft <= 10) {
+                    document.getElementById('timer-display').className = 'text-xl md:text-2xl font-black text-red-500 animate-pulse';
+                }
+                
+                if (timeLeft <= 0) {
+                    endQuiz();
+                }
+            }, 1000);
+        }
+
+        function stopQuiz() {
+            // Stop the timer
+            clearInterval(timer);
+            
+            // Show confirmation dialog
+            if (confirm('هل أنت متأكد من توقيف التحدي؟ لن يتم احتساب النتائج الحالية.')) {
+                // Return to quiz intro without saving results
+                document.getElementById('quiz-container').classList.add('hidden');
+                document.getElementById('quiz-intro').classList.remove('hidden');
+                
+                // Reset quiz state
+                currentQuestion = 0;
+                score = 0;
+                timeLeft = 300;
+                
+                // Reset UI elements
+                document.getElementById('score-display').textContent = '0';
+                document.getElementById('timer-display').textContent = '5:00';
+                document.getElementById('timer-display').className = 'text-amber-600 font-bold text-xl';
+            } else {
+                // If user cancels, restart the timer
+                startTimer();
+            }
+        }
+
+        function endQuiz() {
+            clearInterval(timer);
+            
+            // Calculate quiz statistics
+            const questionsAnswered = Math.floor(score / 10);
+            const totalQuestions = quizQuestions.length;
+            const timeSpent = 300 - timeLeft; // Time spent in seconds
+            const accuracy = Math.round((questionsAnswered / totalQuestions) * 100);
+            
+            // Prepare quiz data
+            const quizData = {
+                questionsAnswered: questionsAnswered,
+                totalQuestions: totalQuestions,
+                timeSpent: timeSpent,
+                accuracy: accuracy
+            };
+            
+            // Update leaderboard with quiz score and data
+            const userName = localStorage.getItem('userName') || 'طالب';
+            updateUserScore(userName, score, quizData);
+            
+            const quizContainer = document.getElementById('quiz-container');
+            quizContainer.innerHTML = `
+                <div class="text-center space-y-6 glass-effect p-8 md:p-16 rounded-[2rem] md:rounded-[3rem]">
+                    <div class="text-6xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-orange-600 to-yellow-600 animate-pulse mb-4">${score}</div>
+                    <h3 class="text-2xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-orange-600 to-yellow-600 animate-pulse mb-4">انتهى التحدي!</h3>
+                    <div class="bg-white/80 backdrop-blur rounded-2xl p-6 mb-8">
+                        <p class="text-lg md:text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-orange-600 to-yellow-600 mb-4">لقد أجبت على ${questionsAnswered} من ${totalQuestions} أسئلة</p>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                            <div class="bg-amber-50 p-4 rounded-xl">
+                                <div class="text-2xl font-black text-amber-600">${accuracy}%</div>
+                                <div class="text-sm text-gray-600">دقة الإجابة</div>
+                            </div>
+                            <div class="bg-blue-50 p-4 rounded-xl">
+                                <div class="text-2xl font-black text-blue-600">${Math.floor(timeSpent / 60)}:${(timeSpent % 60).toString().padStart(2, '0')}</div>
+                                <div class="text-sm text-gray-600">الوقت المستخدم</div>
+                            </div>
+                            <div class="bg-purple-50 p-4 rounded-xl">
+                                <div class="text-2xl font-black text-purple-600">${score}</div>
+                                <div class="text-sm text-gray-600">النقاط الكلية</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <button onclick="startQuiz()" class="px-8 py-4 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-xl font-black hover:from-emerald-600 hover:to-emerald-700 transition-all transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                            </svg>
+                            تحدي آخر
+                        </button>
+                        <button onclick="switchTab('leaderboard')" class="px-8 py-4 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-xl font-black hover:from-purple-600 hover:to-purple-700 transition-all transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2m0 0V9a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                            </svg>
+                            لوحة التمييز
+                        </button>
+                        <button onclick="switchTab('home')" class="px-8 py-4 bg-gradient-to-r from-gray-500 to-gray-600 text-white rounded-xl font-black hover:from-gray-600 hover:to-gray-700 transition-all transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                            </svg>
+                            العودة للرئيسية
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Leaderboard Functions
+        let leaderboardData = [];
+        
+        function initializeLeaderboard() {
+            loadLeaderboardData();
+            updatePodium();
+            updateLeaderboardList();
+        }
+
+        function loadLeaderboardData() {
+            const storedData = localStorage.getItem('leaderboardData');
+            if (storedData) {
+                leaderboardData = JSON.parse(storedData);
+            } else {
+                // Initialize empty leaderboard - only users who take challenges will appear
+                leaderboardData = [];
+                saveLeaderboardData();
+            }
+        }
+
+        function saveLeaderboardData() {
+            localStorage.setItem('leaderboardData', JSON.stringify(leaderboardData));
+        }
+
+        function clearLeaderboardData() {
+            leaderboardData = [];
+            localStorage.removeItem('leaderboardData');
+            saveLeaderboardData();
+            updatePodium();
+            updateLeaderboardList();
+        }
+
+        function updatePodium() {
+            // Update 1st place
+            const first = leaderboardData[0];
+            if (first) {
+                // Use user's actual avatar if logged in, otherwise use generated one
+                const currentUser = localStorage.getItem('userName');
+                if (currentUser && first.name === currentUser) {
+                    // For logged-in user, use their profile picture or generate based on name
+                    const userAvatar = localStorage.getItem('userAvatar') || `https://picsum.photos/seed/${first.name}/200/200.jpg`;
+                    const avatarElement = document.getElementById('avatar-rank-1');
+                    if (avatarElement) avatarElement.src = userAvatar;
+                } else {
+                    // For other users, use generated avatar based on their name
+                    const avatarElement = document.getElementById('avatar-rank-1');
+                    if (avatarElement) avatarElement.src = `https://picsum.photos/seed/${first.name}/200/200.jpg`;
+                }
+                const nameElement = document.getElementById('name-rank-1');
+                if (nameElement) nameElement.textContent = first.name;
+                const pointsElement = document.getElementById('points-rank-1');
+                if (pointsElement) pointsElement.textContent = first.points + ' نقطة';
+                const labelElement = document.getElementById('label-rank-1');
+                if (labelElement) labelElement.textContent = first.label;
+            } else {
+                // Reset to default values if no data
+                const nameElement = document.getElementById('name-rank-1');
+                if (nameElement) nameElement.textContent = 'المستخدم';
+                const pointsElement = document.getElementById('points-rank-1');
+                if (pointsElement) pointsElement.textContent = '0 نقطة';
+                const labelElement = document.getElementById('label-rank-1');
+                if (labelElement) labelElement.textContent = 'جديد';
+            }
+            
+            // Update 2nd place
+            const second = leaderboardData[1];
+            if (second) {
+                const currentUser = localStorage.getItem('userName');
+                if (currentUser && second.name === currentUser) {
+                    const userAvatar = localStorage.getItem('userAvatar') || `https://picsum.photos/seed/${second.name}/200/200.jpg`;
+                    const avatarElement = document.getElementById('avatar-rank-2');
+                    if (avatarElement) avatarElement.src = userAvatar;
+                } else {
+                    const avatarElement = document.getElementById('avatar-rank-2');
+                    if (avatarElement) avatarElement.src = `https://picsum.photos/seed/${second.name}/200/200.jpg`;
+                }
+                const nameElement = document.getElementById('name-rank-2');
+                if (nameElement) nameElement.textContent = second.name;
+                const pointsElement = document.getElementById('points-rank-2');
+                if (pointsElement) pointsElement.textContent = second.points + ' نقطة';
+                const labelElement = document.getElementById('label-rank-2');
+                if (labelElement) labelElement.textContent = second.label;
+            }
+            
+            // Update 3rd place
+            const third = leaderboardData[2];
+            if (third) {
+                const currentUser = localStorage.getItem('userName');
+                if (currentUser && third.name === currentUser) {
+                    const userAvatar = localStorage.getItem('userAvatar') || `https://picsum.photos/seed/${third.name}/200/200.jpg`;
+                    const avatarElement = document.getElementById('avatar-rank-3');
+                    if (avatarElement) avatarElement.src = userAvatar;
+                } else {
+                    const avatarElement = document.getElementById('avatar-rank-3');
+                    if (avatarElement) avatarElement.src = `https://picsum.photos/seed/${third.name}/200/200.jpg`;
+                }
+                const nameElement = document.getElementById('name-rank-3');
+                if (nameElement) nameElement.textContent = third.name;
+                const pointsElement = document.getElementById('points-rank-3');
+                if (pointsElement) pointsElement.textContent = third.points + ' نقطة';
+                const labelElement = document.getElementById('label-rank-3');
+                if (labelElement) labelElement.textContent = third.label;
+            }
+        }
+
+function updateLeaderboardList() {
+    const listContainer = document.getElementById('leaderboard-list');
+    
+    if (!listContainer) {
+        console.error('Leaderboard list container not found');
+        return;
+    }
+    
+    // Show users from rank 4 onwards
+    const otherUsers = leaderboardData.slice(3);
+    
+    if (otherUsers.length === 0) {
+        listContainer.innerHTML = '<div class="p-4 text-center text-gray-500">لا يوجد المزيد من المتسابقين حالياً</div>';
+        return;
+    }
+    
+    listContainer.innerHTML = otherUsers.map((user, index) => {
+        // Use user's actual avatar if logged in, otherwise use generated one
+        const currentUser = localStorage.getItem('userName');
+        let userAvatar;
+        if (currentUser && user.name === currentUser) {
+            userAvatar = localStorage.getItem('userAvatar') || `https://picsum.photos/seed/${user.name}/100/100.jpg`;
+        } else {
+            userAvatar = `https://picsum.photos/seed/${user.name}/100/100.jpg`;
+        }
+        
+        const rank = index + 4; // Start from rank 4
+        return `
+            <div class="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center font-bold text-sm text-gray-600">
+                        ${rank}
+                    </div>
+                    <img src="${userAvatar}" alt="${user.name}" class="w-10 h-10 rounded-full object-cover">
+                    <div>
+                        <div class="font-semibold text-gray-900">${user.name}</div>
+                        <div class="text-sm text-gray-500">${user.label}</div>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <div class="font-bold text-amber-600">${user.points} نقطة</div>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+function getTrendIcon(trend) {
+    switch(trend) {
+        case 'up':
+            return '<svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>';
+        case 'down':
+            return '<svg class="w-4 h-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"></path></svg>';
+        case 'same':
+            return '<svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14"></path></svg>';
+        default:
+            return '';
+    }
+}
+
+function updateUserScore(userName, points, quizData = null) {
+    const userIndex = leaderboardData.findIndex(u => u.name === userName);
+    const currentTime = new Date().toISOString();
+    
+    if (userIndex !== -1) {
+        // Update existing user
+        leaderboardData[userIndex].points += points;
+        leaderboardData[userIndex].lastActive = currentTime;
+        
+        // Update quiz statistics if quiz data provided
+        if (quizData) {
+            if (!leaderboardData[userIndex].quizHistory) {
+                leaderboardData[userIndex].quizHistory = [];
+            }
+            
+            const quizSession = {
+                date: currentTime,
+                score: points,
+                questionsAnswered: quizData.questionsAnswered,
+                totalQuestions: quizData.totalQuestions,
+                timeSpent: quizData.timeSpent,
+                accuracy: quizData.accuracy
+            };
+            
+            leaderboardData[userIndex].quizHistory.push(quizSession);
+            
+            // Update statistics
+            const totalQuizzes = leaderboardData[userIndex].quizHistory.length;
+            const totalScore = leaderboardData[userIndex].quizHistory.reduce((sum, quiz) => sum + quiz.score, 0);
+            const totalTime = leaderboardData[userIndex].quizHistory.reduce((sum, quiz) => sum + quiz.timeSpent, 0);
+            
+            leaderboardData[userIndex].totalQuizzes = totalQuizzes;
+            leaderboardData[userIndex].avgScore = Math.round(totalScore / totalQuizzes);
+            leaderboardData[userIndex].totalTime = totalTime;
+            leaderboardData[userIndex].avgTime = Math.round(totalTime / totalQuizzes);
+            leaderboardData[userIndex].avgAccuracy = Math.round(
+                leaderboardData[userIndex].quizHistory.reduce((sum, quiz) => sum + quiz.accuracy, 0) / totalQuizzes
+            );
+        }
+        
+        // Update label based on performance
+        if (leaderboardData[userIndex].points >= 400) {
+            leaderboardData[userIndex].label = 'بطل المنصة';
+        } else if (leaderboardData[userIndex].points >= 300) {
+            leaderboardData[userIndex].label = 'نابغة العصر';
+        } else if (leaderboardData[userIndex].points >= 200) {
+            leaderboardData[userIndex].label = 'عبقرية';
+        } else if (leaderboardData[userIndex].points >= 100) {
+            leaderboardData[userIndex].label = 'متفوق';
+        } else {
+            leaderboardData[userIndex].label = 'مجتهد';
+        }
+        
+        // Update trend
+        const previousPoints = leaderboardData[userIndex].points - points;
+        if (points > 0) {
+            leaderboardData[userIndex].trend = 'up';
+        } else {
+            leaderboardData[userIndex].trend = 'same';
+        }
+        
+    } else {
+        // Add new user
+        const newUser = {
+            rank: leaderboardData.length + 1,
+            name: userName,
+            points: points,
+            avatar: 'https://picsum.photos/seed/' + userName + '/100/100.jpg',
+            label: points >= 100 ? 'متفوق' : 'جديد',
+            trend: 'up',
+            lastActive: currentTime,
+            totalQuizzes: quizData ? 1 : 0,
+            avgScore: quizData ? points : 0,
+            totalTime: quizData ? quizData.timeSpent : 0,
+            avgTime: quizData ? quizData.timeSpent : 0,
+            avgAccuracy: quizData ? quizData.accuracy : 0,
+            quizHistory: quizData ? [{
+                date: currentTime,
+                score: points,
+                questionsAnswered: quizData.questionsAnswered,
+                totalQuestions: quizData.totalQuestions,
+                timeSpent: quizData.timeSpent,
+                accuracy: quizData.accuracy
+            }] : []
+        };
+        leaderboardData.push(newUser);
+    }
+    
+    // Sort by points and update ranks
+    leaderboardData.sort((a, b) => b.points - a.points);
+    leaderboardData.forEach((user, index) => {
+        user.rank = index + 1;
+    });
+    
+    saveLeaderboardData();
+    updatePodium();
+    updateLeaderboardList();
+}
+
+function simulateLiveUpdate() {
+    // Randomly update a user's score
+    if (leaderboardData.length > 0) {
+        const randomUser = leaderboardData[Math.floor(Math.random() * leaderboardData.length)];
+        const randomPoints = Math.floor(Math.random() * 20) + 5;
+        updateUserScore(randomUser.name, randomPoints);
+    }
+}
+
+// Tab switching function
+function switchTab(tabName) {
+    // Hide all tabs
+    document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.add('hidden');
+    });
+    
+    // Show selected tab
+    document.getElementById('tab-' + tabName).classList.remove('hidden');
+    
+    // Initialize leaderboard when switching to leaderboard tab
+    if (tabName === 'leaderboard') {
+        setTimeout(initializeLeaderboard, 100);
+    }
+}
+
+window.addEventListener('resize', checkMobile);
+checkMobile();
+checkDarkMode();
+checkLoginStatus();
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
